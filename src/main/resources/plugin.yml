@@ -6,3 +6,6 @@ prefix: [ PMCP ]
 authors: [ PMCP_Entwicklerteam ]
 description: Der Kern für die Hungergames von PMCP
 website: https://discord.gg/bwQbkREBpG
+commands:
+  isfreeze:
+    permission: pmcp.admin

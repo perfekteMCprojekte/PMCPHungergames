@@ -12,7 +12,7 @@ public final class main extends JavaPlugin {
         // Plugin startup logic
         Bukkit.getLogger().info("PMCP Hungergames ist nun gestartet.");
         //cmd register
-        this.getCommand("freeze").setExecutor(new isfreeze());
+        this.getCommand("Freeze").setExecutor(new isfreeze());
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new Freeze(), this);

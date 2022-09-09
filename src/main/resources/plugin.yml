@@ -7,5 +7,5 @@ authors: [ PMCP_Entwicklerteam ]
 description: Der Kern für die Hungergames von PMCP
 website: https://discord.gg/bwQbkREBpG
 commands:
-  Freeze:
+  isfreeze:
     permission: pmcp.admin

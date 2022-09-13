@@ -11,3 +11,5 @@ commands:
     permission: pmcp.admin
   Timer:
     permission: pmcp.admin
+  PostTimer:
+    permission: pmcp.admin

@@ -30,6 +30,7 @@ public class PostTimer implements CommandExecutor {
                         break;
                     case 30:
                         Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP ]" + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "30 " + ChatColor.AQUA + "Sekunden");
+                        break;
                     case 10:
                         Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP ]" + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "10 " + ChatColor.AQUA + "Sekunden");
                         break;

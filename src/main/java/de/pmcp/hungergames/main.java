@@ -17,7 +17,7 @@ public final class main extends JavaPlugin {
         //cmd register
         this.getCommand("isfreeze").setExecutor(new isfreeze());
         this.getCommand("Timer").setExecutor(new Timer());
-        this.getCommand("PostTimer").setExecutor(new PostTimer());
+        this.getCommand("posttimer").setExecutor(new PostTimer());
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new Freeze(), this);

@@ -10,12 +10,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PostTimer implements CommandExecutor {
     private int sec;
-    private double time;
-    @Override
+@Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         sec = 600;
-        BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
+            BukkitRunnable runnable = new BukkitRunnable() {
+        @Override
             public void run() {
             //Timer
                 switch (sec) {

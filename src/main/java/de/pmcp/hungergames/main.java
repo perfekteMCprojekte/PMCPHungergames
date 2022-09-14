@@ -2,6 +2,7 @@ package de.pmcp.hungergames;
 
 import de.pmcp.hungergames.postgame.PostTimer;
 import de.pmcp.hungergames.pregame.Freeze;
+import de.pmcp.hungergames.pregame.StartTimer;
 import de.pmcp.hungergames.pregame.isfreeze;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -16,6 +17,7 @@ public final class main extends JavaPlugin {
         //cmd register
         this.getCommand("isfreeze").setExecutor(new isfreeze());
         this.getCommand("PostTimer").setExecutor(new PostTimer());
+        this.getCommand("StartTimer").setExecutor(new StartTimer());
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new Freeze(), this);

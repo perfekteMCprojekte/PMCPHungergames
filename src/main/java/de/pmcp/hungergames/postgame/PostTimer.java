@@ -10,13 +10,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PostTimer implements CommandExecutor {
     private int sec;
-@Override
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         sec = 600;
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
-            //Timer
+                //Timer
                 switch (sec) {
                     case 600:
                         Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in" + ChatColor.RED + "10" + ChatColor.AQUA + "Minuten");
@@ -49,7 +49,7 @@ public class PostTimer implements CommandExecutor {
                         Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in" + ChatColor.RED + "1" + ChatColor.AQUA + "Sekunden");
                         break;
                 }
-            //Ende vom Timer
+                //Ende vom Timer
                 if (sec == 0) {
                     Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Ihr könnt den Gommemode deaktivieren");
                     de.pmcp.hungergames.pregame.isfreeze.isfreeze = true;

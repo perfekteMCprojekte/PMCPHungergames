@@ -52,6 +52,7 @@ public class PostTimer implements CommandExecutor {
             //Ende vom Timer
                 if (sec == 0) {
                     Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Ihr könnt den Gommemode deaktivieren");
+                    de.pmcp.hungergames.pregame.isfreeze.isfreeze = true;
                     cancel();
                     return;
                 }

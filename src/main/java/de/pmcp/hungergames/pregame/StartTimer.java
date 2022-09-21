@@ -1,5 +1,6 @@
 package de.pmcp.hungergames.pregame;
 
+import de.pmcp.hungergames.game.Startgame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -68,6 +69,7 @@ public class StartTimer implements CommandExecutor {
                 if (sec == 0) {
                     Bukkit.broadcastMessage(ChatColor.DARK_RED + "Viel Glück!");
                     de.pmcp.hungergames.pregame.isfreeze.isfreeze = false;
+                    Startgame.game = true;
                     cancel();
 
                 }

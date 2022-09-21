@@ -16,29 +16,41 @@ public class Freeze implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onmove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
-        if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
-            e.setCancelled(true);
-            player.sendMessage("Du darfst dich nicht bewegen!");
+        boolean allowFlight = player.getAllowFlight();
+        if (allowFlight == true) {
+            if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
+                e.setCancelled(true);
+                player.sendMessage("Du darfst dich nicht bewegen!");
+            } else {
+                e.setCancelled(false);
+            }
         }
-        else {e.setCancelled(false);}
     }
     @EventHandler(ignoreCancelled = true)
     public void BlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
-        if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
-            e.setCancelled(true);
-            player.sendMessage("Du darfst dich nicht bewegen!");
+        boolean allowFlight = player.getAllowFlight();
+        if (allowFlight == true) {
+            if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
+                e.setCancelled(true);
+                player.sendMessage("Du darfst dich nicht bewegen!");
+            } else {
+                e.setCancelled(false);
+            }
         }
-        else {e.setCancelled(false);}
     }
     @EventHandler(ignoreCancelled = true)
     public void BlockPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
-        if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
-            e.setCancelled(true);
-            player.sendMessage("Du darfst dich nicht bewegen!");
+        boolean allowFlight = player.getAllowFlight();
+        if (allowFlight == true) {
+            if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
+                e.setCancelled(true);
+                player.sendMessage("Du darfst dich nicht bewegen!");
+            } else {
+                e.setCancelled(false);
+            }
         }
-        else {e.setCancelled(false);}
     }
     @EventHandler(ignoreCancelled = true)
     public void OnDMG(EntityDamageEvent e) {

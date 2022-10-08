@@ -16,8 +16,8 @@ public class Freeze implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onmove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
-        boolean allowFlight = player.getAllowFlight();
-        if (allowFlight == true) {
+        boolean permission = player.hasPermission("pmcp.admin");
+        if (permission == false) {
             if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
                 e.setCancelled(true);
                 player.sendMessage("Du darfst dich nicht bewegen!");

@@ -14,7 +14,7 @@ public class PostTimer implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         sec = 600;
         BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
+                @Override
             public void run() {
                 //Timer
                 switch (sec) {

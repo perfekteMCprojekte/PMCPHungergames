@@ -1,6 +1,5 @@
 package de.pmcp.hungergames.pregame;
 
-import de.pmcp.hungergames.game.Startgame;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,7 +10,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class StartTimer implements CommandExecutor {
     private int sec;
-    private double time;
 
     @Override
     public boolean onCommand(CommandSender sender, Command c, String s, String[] strings) {
@@ -69,13 +67,62 @@ public class StartTimer implements CommandExecutor {
                 if (sec == 0) {
                     Bukkit.broadcastMessage(ChatColor.DARK_RED + "Viel Glück!");
                     de.pmcp.hungergames.pregame.isfreeze.isfreeze = false;
-                    Startgame.game = true;
                     cancel();
 
                 }
                 sec--;
 
 
+            }
+        };
+        BukkitRunnable baseRunnable = new BukkitRunnable() {
+        int baseSec = 1800;
+            @Override
+            public void run() {
+                switch (baseSec) {
+                    case 1200:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "20 " + ChatColor.AQUA + "Minuten");
+                        break;
+                    case 900:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "15 " + ChatColor.AQUA + "Minuten");
+                        break;
+                    case 600:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "10 " + ChatColor.AQUA + "Minuten");
+                        break;
+                    case 300:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "5 " + ChatColor.AQUA + "Minuten");
+                        break;
+                    case 60:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "1 " + ChatColor.AQUA + "Minute");
+                        break;
+                    case 30:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "30 " + ChatColor.AQUA + "Sekunden");
+                        break;
+                    case 10:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "10 " + ChatColor.AQUA + "Sekunden");
+                        break;
+                    case 5:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "5 " + ChatColor.AQUA + "Sekunden");
+                        break;
+                    case 4:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "4 " + ChatColor.AQUA + "Sekunden");
+                        break;
+                    case 3:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "3 " + ChatColor.AQUA + "Sekunden");
+                        break;
+                    case 2:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "2 " + ChatColor.AQUA + "Sekunden");
+                        break;
+                    case 1:
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Die Hungergames enden in " + ChatColor.RED + "1 " + ChatColor.AQUA + "Sekunde");
+                        break;
+                }
+                if (baseSec == 0) {
+                    Bukkit.broadcastMessage(ChatColor.GREEN + "[PMCP] " + ChatColor.AQUA + "Ihr könnt den Gommemode deaktivieren!");
+                    de.pmcp.hungergames.pregame.isfreeze.isfreeze = true;
+                    cancel();
+                }
+                baseSec--;
             }
         };
         return false;

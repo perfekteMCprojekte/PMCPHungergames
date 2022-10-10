@@ -19,7 +19,7 @@ public final class main extends JavaPlugin {
         Bukkit.getLogger().info("PMCP Hungergames ist nun gestartet.");
         //cmd register
         Objects.requireNonNull(this.getCommand("isfreeze")).setExecutor(new isfreeze());
-        Objects.requireNonNull(this.getCommand("Timer")).setExecutor(new StartTimer());
+        Objects.requireNonNull(this.getCommand("starttimer")).setExecutor(new StartTimer());
         Objects.requireNonNull(this.getCommand("PostTimer")).setExecutor(new PostTimer());
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();

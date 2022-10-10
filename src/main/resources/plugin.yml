@@ -9,7 +9,7 @@ website: https://discord.gg/bwQbkREBpG
 commands:
   isfreeze:
     permission: pmcp.admin
-  Timer:
+  starttimer:
     permission: pmcp.admin
   posttimer:
     permission: pmcp.admin

@@ -8,6 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.List;
+
 public class PostTimer implements CommandExecutor {
     private int sec;
     @Override
@@ -59,7 +61,7 @@ public class PostTimer implements CommandExecutor {
                 sec--;
             }
         };
-        runnable.runTaskTimer(main.getPlugin(), 0, 20);
+        runnable.runTaskTimer(main.plugin, 0, 20);
         return false;
     }
 }

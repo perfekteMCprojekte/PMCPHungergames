@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 
 public final class main extends JavaPlugin {
-    private static main plugin;
+    public static main plugin;
     @Override
     public void onEnable() {
         plugin = this;
@@ -29,8 +29,5 @@ public final class main extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-    }
-    public static main getPlugin() {
-        return plugin;
     }
 }

@@ -17,8 +17,8 @@ public class Freeze implements Listener {
     public void onmove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         boolean permission = player.hasPermission("pmcp.admin");
-        if (permission == false) {
-            if (de.pmcp.hungergames.pregame.isfreeze.isfreeze == true) {
+        if (!permission) {
+            if (de.pmcp.hungergames.pregame.isfreeze.isfreeze) {
                 e.setCancelled(true);
                 player.sendMessage("Du darfst dich nicht bewegen!");
             } else {
@@ -43,7 +43,7 @@ public class Freeze implements Listener {
     public void BlockPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
         boolean allowFlight = player.getAllowFlight();
-        if (allowFlightg) {
+        if (allowFlight) {
             if (de.pmcp.hungergames.pregame.isfreeze.isfreeze) {
                 e.setCancelled(true);
                 player.sendMessage("Du darfst dich nicht bewegen!");

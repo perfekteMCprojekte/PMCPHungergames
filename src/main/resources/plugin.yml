@@ -9,9 +9,9 @@ website: https://discord.gg/bwQbkREBpG
 commands:
   isfreeze:
     permission: pmcp.admin
-  Timer:
+  starttimer:
     permission: pmcp.admin
-  PostTimer:
+  stoptimer:
     permission: pmcp.admin
-  StartTimer:
+  posttimer:
     permission: pmcp.admin

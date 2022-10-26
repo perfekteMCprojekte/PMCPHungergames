@@ -28,7 +28,7 @@ public class StartTimer implements CommandExecutor {
     /**Jede Sekunde ausgeführt*/
     private void tick() {
         if (ArrayUtils.contains(timerPoints, secondsLeft)) {
-            Bukkit.broadcastMessage("§a[PMCP] §bDie Hungergames starten in §c" + (secondsLeft >= 60 ? secondsLeft/60 : secondsLeft) + " §bMinuten");
+            Bukkit.broadcastMessage("§a[PMCP] §bDie Hungergames starten in §c" + (secondsLeft >= 60 ? secondsLeft/60 + " §bMinuten" : secondsLeft + " §bSekunden");
         }
         else if (secondsLeft == 0) start();
         secondsLeft--;

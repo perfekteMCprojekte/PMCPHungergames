@@ -1,10 +1,9 @@
 package de.pmcp.hungergames;
 
-import de.pmcp.hungergames.postgame.PostTimer;
+import de.pmcp.hungergames.timer.BaseTimer;
 import de.pmcp.hungergames.pregame.Freeze;
-import de.pmcp.hungergames.pregame.StartTimer;
+import de.pmcp.hungergames.timer.StartTimer;
 import de.pmcp.hungergames.pregame.isfreeze;
-import de.pmcp.hungergames.pregame.timerSekunden;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,8 +20,7 @@ public final class main extends JavaPlugin {
         //cmd register
         Objects.requireNonNull(this.getCommand("isfreeze")).setExecutor(new isfreeze());
         Objects.requireNonNull(this.getCommand("starttimer")).setExecutor(new StartTimer());
-        Objects.requireNonNull(this.getCommand("PostTimer")).setExecutor(new PostTimer());
-        Objects.requireNonNull(this.getCommand("timerSekunden")).setExecutor(new timerSekunden());
+        Objects.requireNonNull(this.getCommand("PostTimer")).setExecutor(new BaseTimer());
 
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();

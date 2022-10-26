@@ -15,3 +15,10 @@ commands:
     permission: pmcp.admin
   posttimer:
     permission: pmcp.admin
+  timerSekunden:
+    permission: pmcp.admin
+    description: Ändert die Sekunden vom Timer.
+    usage: eine Ganzzahl einfügen
+    aliases: settimer
+    permission-message: ne
+

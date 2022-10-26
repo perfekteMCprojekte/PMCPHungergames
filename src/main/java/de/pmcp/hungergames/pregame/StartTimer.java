@@ -7,13 +7,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.jetbrains.annotations.NotNull;
+
 
 
 public class StartTimer implements CommandExecutor {
     public boolean starttimer = true;
     public boolean basetimer = false;
-    public int secondsLeft = 600; //Hier Countdown dauer Eintragen
+    public static int secondsLeft = 600; //Hier Countdown Dauer eintragen
     final int[] timerPoints = {600, 300, 60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Hier beliebige Werte eintragen
 
     /**Startlogik bei Ablauf des Timers*/
@@ -36,7 +36,7 @@ public class StartTimer implements CommandExecutor {
 
     /**Der Countdown ausgelöst durch /starttimer */
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String string, @NotNull String[] strings) {
+    public boolean onCommand( CommandSender sender, Command command, String string, String[] strings) {
         sender.sendMessage("Countdown gestartet");
         BukkitScheduler scheduler = Bukkit.getScheduler();
 

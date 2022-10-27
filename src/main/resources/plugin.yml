@@ -24,7 +24,7 @@ permissions:
     default: false
     description: Berechtigung für 'Künstler'
 
-  pmcp.player:
+  pmcp.niederesvolk:
     default: true
     description: Berechigung für jeden
 

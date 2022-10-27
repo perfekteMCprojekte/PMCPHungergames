@@ -7,8 +7,6 @@ prefix: PMCP
 authors: [ PMCP_Entwicklerteam ]
 description: Der Kern für die Hungergames von PMCP
 website: https://discord.gg/bwQbkREBpG
-#brauchen wir load: startup/postworld ?
-#nein
 
 #Berechtigungen für das Plugin
 permissions:
@@ -66,3 +64,4 @@ commands:
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
 #Kommentar für Justus: du stinkst
 #Kommentar für Lukas: Danke gleichfalls.
+#Lukas Antworte doch

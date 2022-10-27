@@ -32,18 +32,19 @@ permissions:
 commands:
   isfreeze:
     permission: pmcp.admin
+    description: Friert nicht Operatoren ein
 
   launchtimer:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
     description: Timer für den Spielbeginn
     usage: /launchtimer [start, pause, resume, cancel, set]
-    aliases: ltime
+    aliases: ltimer
 
   basetimer:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
-    description: Timer für Spielende
+    description: Timer für das Spielende
     usage: /basetimer [start, pause, resume, cancel, set]
     aliases: btimer
 
@@ -64,3 +65,4 @@ commands:
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
 #Kommentar für Justus: du stinkst
+#Kommentar für Lukas: Danke gleichfalls.

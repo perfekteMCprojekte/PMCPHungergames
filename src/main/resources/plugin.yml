@@ -38,14 +38,14 @@ commands:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
     description: Timer für den Spielbeginn
-    usage: /launchtimer [start, pause, resume, cancel, set]
+    usage: §7/launchtimer §f[start, pause, resume, cancel, set <sekunden>, status]
     aliases: ltimer
 
   basetimer:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
     description: Timer für das Spielende
-    usage: /basetimer [start, pause, resume, cancel, set]
+    usage: §7/basetimer §f[start, pause, resume, cancel, set <sekunden>, status]
     aliases: btimer
 
 

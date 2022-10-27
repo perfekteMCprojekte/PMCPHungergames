@@ -8,6 +8,7 @@ authors: [ PMCP_Entwicklerteam ]
 description: Der Kern für die Hungergames von PMCP
 website: https://discord.gg/bwQbkREBpG
 #brauchen wir load: startup/postworld ?
+#nein
 
 #Berechtigungen für das Plugin
 permissions:
@@ -59,6 +60,7 @@ commands:
     description: Ändert die Sekunden vom Timer. (-1 für Abbruch)
     usage: Verbleibende Sekunden für den Timer eingeben
     aliases: settimer
-    permission-message: ne
+    permission-message: Nicht jeder Mensch.
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
+#Kommentar für Justus: du stinkst

@@ -1,7 +1,6 @@
 package de.pmcp.hungergames.pregame;
 
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,6 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+
 import static de.pmcp.hungergames.pregame.isfreeze.isfreeze;
 
 
@@ -16,9 +16,9 @@ public class Freeze implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onmove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
-        boolean permission = player.hasPermission("pmcp.admin");
-        if (!permission) {
-            if (de.pmcp.hungergames.pregame.isfreeze.isfreeze) {
+        boolean op = player.isOp();
+        if (!op) {
+            if (isfreeze) {
                 e.setCancelled(true);
                 player.sendMessage("Du darfst dich nicht bewegen!");
             } else {

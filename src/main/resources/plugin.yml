@@ -1,17 +1,64 @@
+#Allgemeines Zeug
 name: PMCP-Hungergames
 version: '${project.version}'
 main: de.pmcp.hungergames.main
 api-version: 1.18
-prefix: [ PMCP ]
+prefix: PMCP
 authors: [ PMCP_Entwicklerteam ]
 description: Der Kern für die Hungergames von PMCP
 website: https://discord.gg/bwQbkREBpG
+#brauchen wir load: startup/postworld ?
+
+#Berechtigungen für das Plugin
+permissions:
+  pmcp.imperator:
+    default: false
+    description: Es macht genau, was du denkst, was es macht
+
+  pmcp.admin:
+    default: op
+    description: Berechtigung für Operatoren
+
+  pmcp.builder:
+    default: false
+    description: Berechtigung für 'Künstler'
+
+  pmcp.player:
+    default: true
+    description: Berechigung für jeden
+
+#Befehle für das Plugin
 commands:
   isfreeze:
     permission: pmcp.admin
+
+  launchtimer:
+    permission: pmcp.admin
+    permission-message: Nicht jeder Mensch.
+    description: Timer für den Spielbeginn
+    usage: /launchtimer [start, pause, resume, cancel, set]
+    aliases: ltime
+
+  basetimer:
+    permission: pmcp.admin
+    permission-message: Nicht jeder Mensch.
+    description: Timer für Spielende
+    usage: /basetimer [start, pause, resume, cancel, set]
+    aliases: btimer
+
+
+  #Alles ab hier soll ersetzt werden
   starttimer:
     permission: pmcp.admin
-  stoptimer:
-    permission: pmcp.admin
+    permission-message: Nicht jeder Mensch.
+    description: Startet den Countdown
   posttimer:
     permission: pmcp.admin
+  timerSekunden:
+    permission: pmcp.admin
+    description: Ändert die Sekunden vom Timer. (-1 für Abbruch)
+    usage: Verbleibende Sekunden für den Timer eingeben
+    aliases: settimer
+    permission-message: ne
+
+#Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile

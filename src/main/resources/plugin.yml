@@ -47,10 +47,6 @@ commands:
     aliases: btimer
 
 
-  #Alles ab hier soll ersetzt werden
-  posttimer:
-    permission: pmcp.admin
-
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
 #Kommentar für Justus: du stinkst
 #Kommentar für Lukas: Danke gleichfalls.

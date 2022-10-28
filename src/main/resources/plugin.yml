@@ -48,18 +48,8 @@ commands:
 
 
   #Alles ab hier soll ersetzt werden
-  starttimer:
-    permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
-    description: Startet den Countdown
   posttimer:
     permission: pmcp.admin
-  timerSekunden:
-    permission: pmcp.admin
-    description: Ändert die Sekunden vom Timer. (-1 für Abbruch)
-    usage: Verbleibende Sekunden für den Timer eingeben
-    aliases: settimer
-    permission-message: Nicht jeder Mensch.
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
 #Kommentar für Justus: du stinkst

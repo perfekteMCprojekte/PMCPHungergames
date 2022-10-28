@@ -11,23 +11,18 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 public class LaunchTimer implements CommandExecutor {
     BukkitScheduler scheduler = Bukkit.getScheduler();
-    public boolean timerActive, timerPaused = false;
+    public static boolean timerActive, timerPaused = false;
     public static int secondsLeft = 600; //Hier Countdown Dauer eintragen
     final int[] timerPoints = {600, 300, 60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Hier beliebige Werte eintragen
-
-    /**Startlogik bei Ablauf des Timers*/
-    private void start() {
-        Bukkit.broadcastMessage("§a[PMCP] §bDie Hungergames sind gestartet:");
-        Bukkit.broadcastMessage("§4§lViel Glück!");
-        de.pmcp.hungergames.pregame.isfreeze.isfreeze = false;
-    }
+    final String hg = "§e[§6Hungergames§e] ";
 
     /**Jede Sekunde ausgeführt*/
     private void tick() {
         if (ArrayUtils.contains(timerPoints, secondsLeft)) {
-            Bukkit.broadcastMessage("§a[PMCP] §bDie Hungergames starten in §c" + (secondsLeft >= 60 ? secondsLeft/60 + " §bMinuten" : secondsLeft + " §bSekunden"));
+            Bukkit.broadcastMessage(hg + "§bDie Spiele starten in §c" + (secondsLeft >= 60 ? secondsLeft/60 + " §bMinuten" : secondsLeft + " §bSekunden"));
         }
-        else if (secondsLeft == 0) start();
+        else if (secondsLeft == 0) new BaseTimer().start_games(); //Spielstart
+
         secondsLeft--;
     }
 
@@ -53,29 +48,31 @@ public class LaunchTimer implements CommandExecutor {
         switch (args[0]) {
             case "start":
                 if (timerActive) { sender.sendMessage("Der Countdown läuft bereits. Nutze /launchtimer status um mehr zu erfahren"); return true; }
+                else if (BaseTimer.timerActive) { sender.sendMessage("Die Spiele laufen bereits!"); return true;}
+                timerPaused = false;
                 timerActive = true;
                 timer();
                 break;
             case "cancel":  //Abbruch
                 if (!timerActive) { sender.sendMessage("Der Countdown läuft gerade nicht"); return true; }
                 timerActive = false;
-                Bukkit.broadcastMessage("§b§oHungergames Start abgebrochen!");
+                Bukkit.broadcastMessage(hg + "Start abgebrochen!");
                 break;
             case "pause":
                 if (timerPaused) { sender.sendMessage("Der Countdown ist bereits pausiert"); return true; }
                 timerPaused = true;
-                Bukkit.broadcastMessage("§6§oHungergames Countdown pausiert!");
+                Bukkit.broadcastMessage(hg + "Countdown pausiert!");
                 break;
             case "resume":
                 if (!timerPaused) { sender.sendMessage("Der Countdown läuft gerade"); return true; }
                 timerPaused = false;
-                Bukkit.broadcastMessage("§2§oHungergames Countdown fortgesetzt!");
+                Bukkit.broadcastMessage(hg + "Countdown fortgesetzt!");
                 break;
             case "set":
                 if (args.length < 2) { sender.sendMessage("Gebe eine Sekundenzahl an auf die du den Timer setzen willst!"); return false; }
                 try {
                     secondsLeft = Integer.parseInt(args[1]);
-                    Bukkit.broadcastMessage("§2§oHungergames Countdown auf §b" + secondsLeft + " §2Sekunden gesetzt!");
+                    Bukkit.broadcastMessage(hg + "Countdown auf §b" + secondsLeft + " §2Sekunden gesetzt!");
                 } catch (NumberFormatException e) {
                     sender.sendMessage("Gebe eine §lZahl§l an");
                     return false;

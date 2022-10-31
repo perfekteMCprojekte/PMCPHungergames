@@ -45,6 +45,11 @@ commands:
     description: Timer für das Spielende
     usage: §7/basetimer §f[start, pause, resume, cancel, set <sekunden>, status]
     aliases: btimer
+  adminmsg:
+    permission: pmcp.admin
+    permission-message: Nicht jeder Mensch.
+    description: Sende ein Nachricht als PMCP
+    usage: §7/basetimer §f<deine Nachricht>
 
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile

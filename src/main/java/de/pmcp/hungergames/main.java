@@ -1,5 +1,6 @@
 package de.pmcp.hungergames;
 
+import de.pmcp.hungergames.CMDS.Adminmsg;
 import de.pmcp.hungergames.timer.BaseTimer;
 import de.pmcp.hungergames.pregame.Freeze;
 import de.pmcp.hungergames.pregame.isfreeze;
@@ -24,6 +25,7 @@ public final class main extends JavaPlugin {
         Objects.requireNonNull(getCommand("launchtimer")).setTabCompleter(new TabCompletion());
         Objects.requireNonNull(getCommand("basetimer")).setExecutor(new BaseTimer());
         Objects.requireNonNull(getCommand("basetimer")).setTabCompleter(new TabCompletion());
+        Objects.requireNonNull(getCommand("adminmsg")).setExecutor(new Adminmsg());
 
 
         //listener register

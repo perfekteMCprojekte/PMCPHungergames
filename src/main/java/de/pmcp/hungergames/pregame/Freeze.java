@@ -29,8 +29,8 @@ public class Freeze implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void BlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
-        boolean allowFlight = player.getAllowFlight();
-        if (allowFlight) {
+        boolean op = player.isOp();
+        if (!op) {
             if (de.pmcp.hungergames.pregame.isfreeze.isfreeze) {
                 e.setCancelled(true);
                 player.sendMessage("Du darfst dich nicht bewegen!");
@@ -42,8 +42,8 @@ public class Freeze implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void BlockPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
-        boolean allowFlight = player.getAllowFlight();
-        if (allowFlight) {
+        boolean op = player.isOp();
+        if (!op) {
             if (de.pmcp.hungergames.pregame.isfreeze.isfreeze) {
                 e.setCancelled(true);
                 player.sendMessage("Du darfst dich nicht bewegen!");

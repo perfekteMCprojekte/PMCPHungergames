@@ -9,7 +9,7 @@ public class isfreeze implements CommandExecutor {
     public static boolean isfreeze = false;
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (isfreeze == true) {
+        if (isfreeze) {
             isfreeze = false;
             sender.sendMessage("Freeze ist nun aus!");
         } else {

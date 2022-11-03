@@ -7,7 +7,6 @@ prefix: PMCP
 authors: [ PMCP_Entwicklerteam ]
 description: Der Kern für die Hungergames von PMCP
 website: https://discord.gg/bwQbkREBpG
-#brauchen wir load: startup/postworld ?
 
 #Berechtigungen für das Plugin
 permissions:
@@ -23,7 +22,7 @@ permissions:
     default: false
     description: Berechtigung für 'Künstler'
 
-  pmcp.player:
+  pmcp.niederesvolk:
     default: true
     description: Berechigung für jeden
 
@@ -31,34 +30,31 @@ permissions:
 commands:
   isfreeze:
     permission: pmcp.admin
+    description: Friert nicht Operatoren ein
 
   launchtimer:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
     description: Timer für den Spielbeginn
-    usage: /launchtimer [start, pause, resume, cancel, set]
-    aliases: ltime
+    usage: §7/launchtimer §f[start, pause, resume, cancel, set <sekunden>, status]
+    aliases: ltimer
 
   basetimer:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
-    description: Timer für Spielende
-    usage: /basetimer [start, pause, resume, cancel, set]
+    description: Timer für das Spielende
+    usage: §7/basetimer §f[start, pause, resume, cancel, set <sekunden>, status]
     aliases: btimer
-
-
-  #Alles ab hier soll ersetzt werden
-  starttimer:
+  adminmsg:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
-    description: Startet den Countdown
-  posttimer:
-    permission: pmcp.admin
-  timerSekunden:
-    permission: pmcp.admin
-    description: Ändert die Sekunden vom Timer. (-1 für Abbruch)
-    usage: Verbleibende Sekunden für den Timer eingeben
-    aliases: settimer
-    permission-message: ne
+    description: Sende ein Nachricht als PMCP
+    usage: §7/basetimer §f<deine Nachricht>
+
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
+#Kommentar für Justus: du stinkst
+#Kommentar für Lukas: Danke gleichfalls.
+#Lukas Antworte doch
+#Kommentar für Justus: ne
+#Kommentar für Lukas: Notiert.

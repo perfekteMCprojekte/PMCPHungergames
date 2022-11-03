@@ -1,26 +1,31 @@
 package de.pmcp.hungergames;
 
+import de.pmcp.hungergames.CMDS.Adminmsg;
 import de.pmcp.hungergames.timer.BaseTimer;
 import de.pmcp.hungergames.pregame.Freeze;
-import de.pmcp.hungergames.timer.StartTimer;
 import de.pmcp.hungergames.pregame.isfreeze;
+import de.pmcp.hungergames.timer.LaunchTimer;
+import de.pmcp.hungergames.timer.TabCompletion;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
 public final class main extends JavaPlugin {
-    public static main plugin;
+    public static main plugin; //Plugin als Variable
     @Override
-    public void onEnable() {
+    public void onEnable() {  // Plugin startup logic
         plugin = this;
-        // Plugin startup logic
-        Bukkit.getLogger().info("PMCP Hungergames ist nun gestartet.");
-        //cmd register
-        Objects.requireNonNull(this.getCommand("isfreeze")).setExecutor(new isfreeze());
-        Objects.requireNonNull(this.getCommand("starttimer")).setExecutor(new StartTimer());
-        Objects.requireNonNull(this.getCommand("PostTimer")).setExecutor(new BaseTimer());
+        Bukkit.getLogger().info("PMCP Hungergames Plugin ist nun gestartet.");
+
+        //Befehle Registrieren
+        newCommand("isfreeze", new isfreeze());
+        newCommand("adminmsg", new Adminmsg());
+        newCommand("launchtimer", new LaunchTimer(), new TabCompletion());
+        newCommand("basetimer", new BaseTimer(), new TabCompletion());
 
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
@@ -28,7 +33,15 @@ public final class main extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+    public void onDisable() { // Plugin shutdown logic
+
+    }
+
+
+    //Einfache Befehls Erstellung
+    private void newCommand(String command, CommandExecutor cmdfile) { Objects.requireNonNull(getCommand(command)).setExecutor(cmdfile); }
+    private void newCommand(String command, CommandExecutor cmdfile, TabCompleter tabfile) {
+        Objects.requireNonNull(getCommand(command)).setExecutor(cmdfile);
+        Objects.requireNonNull(getCommand(command)).setTabCompleter(tabfile);
     }
 }

@@ -1,6 +1,7 @@
 package de.pmcp.hungergames;
 
 import de.pmcp.hungergames.CMDS.Adminmsg;
+import de.pmcp.hungergames.events.Deathevent;
 import de.pmcp.hungergames.timer.BaseTimer;
 import de.pmcp.hungergames.pregame.Freeze;
 import de.pmcp.hungergames.pregame.isfreeze;
@@ -31,6 +32,7 @@ public final class main extends JavaPlugin {
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new Freeze(), this);
+        pluginManager.registerEvents(new Deathevent(), this);
     }
 
     @Override

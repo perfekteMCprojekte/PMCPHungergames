@@ -14,7 +14,7 @@ public class Adminmsg implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,  String[] args) {
         if (args == null) {sender.sendMessage("Bist du dumm?");}
-        Bukkit.broadcastMessage(hg + ChatColor.AQUA + Arrays.toString(args));
+        else {Bukkit.broadcastMessage(hg + ChatColor.AQUA + Arrays.toString(args));}
         return false;
     }
 }

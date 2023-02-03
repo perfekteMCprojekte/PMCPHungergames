@@ -2,11 +2,11 @@ package de.pmcp.hungergames;
 
 //Hungergames Dateien
 import de.pmcp.hungergames.CMDS.Adminmsg;
+import de.pmcp.hungergames.CMDS.Timer;
 import de.pmcp.hungergames.game.InfoBar;
 import de.pmcp.hungergames.game.Death;
-import de.pmcp.hungergames.timer.BaseTimer;
-import de.pmcp.hungergames.timer.LaunchTimer;
-import de.pmcp.hungergames.timer.TabCompletion;
+import de.pmcp.hungergames.game.DayTimer;
+import de.pmcp.hungergames.CMDS.TabCompletion;
 import de.pmcp.hungergames.CMDS.Freeze;
 import de.pmcp.hungergames.tools.Freezer;
 
@@ -27,9 +27,8 @@ public final class main extends JavaPlugin {
 
         //Befehle Registrieren
         newCommand("adminmsg", new Adminmsg());
-        newCommand("launchtimer", new LaunchTimer(), new TabCompletion());
-        newCommand("basetimer", new BaseTimer(), new TabCompletion());
         newCommand("freeze", new Freeze());
+        newCommand("timer", new Timer(), new TabCompletion());
 
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
@@ -38,6 +37,7 @@ public final class main extends JavaPlugin {
         Freezer.effects();
         pluginManager.registerEvents(new Death(), this);
         InfoBar.info();
+        DayTimer daytimer = new DayTimer(); daytimer.timer();
     }
 
     @Override

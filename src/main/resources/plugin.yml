@@ -28,20 +28,6 @@ permissions:
 
 #Befehle für das Plugin
 commands:
-  launchtimer:
-    permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
-    description: Timer für den Spielbeginn
-    usage: §7/launchtimer §f[start, pause, resume, cancel, set <sekunden>, status]
-    aliases: ltimer
-
-  basetimer:
-    permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
-    description: Timer für das Spielende
-    usage: §7/basetimer §f[start, pause, resume, cancel, set <sekunden>, status]
-    aliases: btimer
-
   adminmsg:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
@@ -53,6 +39,12 @@ commands:
     permission-message: Nicht jeder Mensch.
     description: Pausiert alles
     aliases: pause
+
+  timer:
+    permission: pmcp.admin
+    permission-message: Nicht jeder Mensch.
+    description: Timer für das Spiel (einen tag)
+    usage: §7/timer §f[pause, resume, set <sekunden>, status]
 
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile

@@ -20,7 +20,7 @@ permissions:
 
   pmcp.builder:
     default: false
-    description: Berechtigung für 'Künstler'
+    description: Berechtigung für 'Künstliche Künstler'
 
   pmcp.niederesvolk:
     default: true
@@ -28,10 +28,6 @@ permissions:
 
 #Befehle für das Plugin
 commands:
-  isfreeze:
-    permission: pmcp.admin
-    description: Friert nicht Operatoren ein
-
   launchtimer:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
@@ -45,11 +41,18 @@ commands:
     description: Timer für das Spielende
     usage: §7/basetimer §f[start, pause, resume, cancel, set <sekunden>, status]
     aliases: btimer
+
   adminmsg:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
     description: Sende ein Nachricht als PMCP
-    usage: §7/basetimer §f<deine Nachricht>
+    usage: §7/adminmsg §f<deine Nachricht>
+
+  freeze:
+    permission: pmcp.admin
+    permission-message: Nicht jeder Mensch.
+    description: Pausiert alles
+    aliases: pause
 
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
@@ -58,3 +61,4 @@ commands:
 #Lukas Antworte doch
 #Kommentar für Justus: ne
 #Kommentar für Lukas: Notiert.
+#Silas, wirst du hier jemals reinschauen?

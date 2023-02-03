@@ -1,5 +1,6 @@
 package de.pmcp.hungergames.timer;
 
+import de.pmcp.hungergames.CMDS.freeze;
 import de.pmcp.hungergames.main;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
@@ -20,7 +21,7 @@ public class BaseTimer implements CommandExecutor {
      public void start_games() {
         timerPaused = false;
         timerActive = true;
-        de.pmcp.hungergames.pregame.isfreeze.isfreeze = false;
+        freeze.isfreeze = false;
         Bukkit.broadcastMessage(" ");
         Bukkit.broadcastMessage(hg + "§bDie Spiele sind gestartet:");
         Bukkit.broadcastMessage(hg + "§4§lViel Glück!");

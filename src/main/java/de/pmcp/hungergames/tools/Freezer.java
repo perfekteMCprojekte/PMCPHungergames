@@ -1,6 +1,6 @@
 package de.pmcp.hungergames.tools;
 
-import de.pmcp.hungergames.CMDS.freeze;
+import de.pmcp.hungergames.CMDS.Freeze;
 import de.pmcp.hungergames.main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,29 +12,29 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class freezer implements Listener {
+public class Freezer implements Listener {
 
     @EventHandler
     public void freeze_move(PlayerMoveEvent event) {
-        if (!freeze.isfreeze) return;
+        if (!Freeze.isfreeze) return;
         if (event.getPlayer().isOp()) return;
         event.setCancelled(true);
     }
     @EventHandler
     public void freeze_damage(PlayerInteractEntityEvent event) {
-        if (!freeze.isfreeze) return;
+        if (!Freeze.isfreeze) return;
         if (event.getPlayer().isOp()) return;
         event.setCancelled(true);
     }
     @EventHandler
     public void freeze_interact(PlayerInteractEvent event) {
-        if (!freeze.isfreeze) return;
+        if (!Freeze.isfreeze) return;
         if (event.getPlayer().isOp()) return;
         event.setCancelled(true);
     }
     @EventHandler
     public void freeze_interact(InventoryOpenEvent event) {
-        if (!freeze.isfreeze) return;
+        if (!Freeze.isfreeze) return;
         if (event.getPlayer().isOp()) return;
         event.setCancelled(true);
     }
@@ -43,7 +43,7 @@ public class freezer implements Listener {
 
         new BukkitRunnable() {
             @Override public void run() {
-                if (!freeze.isfreeze) return;
+                if (!Freeze.isfreeze) return;
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     int i = 0;
                     player.sendTitle("║", "Bitte warten...", 1, 1, 12);

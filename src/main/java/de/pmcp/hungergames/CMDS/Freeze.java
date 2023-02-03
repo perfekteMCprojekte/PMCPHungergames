@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-public class freeze implements CommandExecutor {
+public class Freeze implements CommandExecutor {
     public static boolean isfreeze = true;
 
     @Override

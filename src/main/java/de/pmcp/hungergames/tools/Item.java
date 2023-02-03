@@ -6,7 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
-public class item {
+public class Item {
     static ItemStack create(Material material, int amount, String name, String text) {
         ItemStack item = new ItemStack(material, amount); //Create Item (with count)
         ItemMeta meta = item.getItemMeta();

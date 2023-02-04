@@ -8,6 +8,7 @@ import de.pmcp.hungergames.game.DayTimer;
 import de.pmcp.hungergames.CMDS.TabCompletion;
 import de.pmcp.hungergames.CMDS.Freeze;
 import de.pmcp.hungergames.game.Info;
+import de.pmcp.hungergames.game.Volcano;
 import de.pmcp.hungergames.tools.Freezer;
 
 import org.bukkit.Bukkit;

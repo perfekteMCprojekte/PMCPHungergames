@@ -22,7 +22,7 @@ public class Info implements Listener {
                 } else {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§4Tag: §6§l" + Engine.day + " §r§4|| " + "§r§6" + Death.deathCount + " §r§4Leiche gefunden"));
                 }
-            }
+            };
         }, 0, 20); //Timings für Info
     }
     //Für Tagesnachrichten

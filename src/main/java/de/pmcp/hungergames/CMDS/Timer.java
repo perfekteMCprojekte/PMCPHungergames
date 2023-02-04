@@ -21,7 +21,7 @@ public class Timer implements CommandExecutor {
                 Bukkit.broadcastMessage("§e[§6Hungergames§e] Die Spiele wurden pausiert!");
                 break;
             case "resume":
-                if (!DayTimer.timerPaused) { sender.sendMessage("Die Spiele laufen gerade"); return true; }
+                if (!DayTimer.timerPaused) { sender.sendMessage("Die Spiele laufen gerade"); return true;}
                 DayTimer.timerPaused = false;
                 Bukkit.broadcastMessage("§e[§6Hungergames§e] Die Spiele gehen weiter!");
                 break;

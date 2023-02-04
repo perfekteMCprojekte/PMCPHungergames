@@ -1,7 +1,6 @@
 package de.pmcp.hungergames.game;
 
-import de.pmcp.hungergames.main;
-import de.pmcp.hungergames.tools.random;
+import de.pmcp.hungergames.tools.Random;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.util.Vector;
 
-public class volcano implements Listener {
+public class Volcano implements Listener {
 
     @EventHandler
     public void spit(PlayerToggleSneakEvent event) {
@@ -21,8 +20,8 @@ public class volcano implements Listener {
 
         Location loc = event.getPlayer().getLocation();
         FallingBlock block = loc.getWorld().spawnFallingBlock(
-                new Location(event.getPlayer().getWorld(),-979.52, 68.00, 384.34), vulcanoDrops[random.rint(0, vulcanoDrops.length-1)], (byte) 0);
-        block.setVelocity(new Vector(random.rouble(-1, 1), random.rouble(0.2, 4.0), random.rouble(-1, 1)));
+                new Location(event.getPlayer().getWorld(),-979.52, 68.00, 384.34), vulcanoDrops[Random.rint(0, vulcanoDrops.length-1)], (byte) 0);
+        block.setVelocity(new Vector(Random.rouble(-1, 1), Random.rouble(0.2, 4.0), Random.rouble(-1, 1)));
         block.setDropItem(false);
         
         //block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation(), 10, 0.1, 1.0,1.0,0, transition, true);

@@ -2,14 +2,13 @@ package de.pmcp.hungergames;
 
 //Hungergames Dateien
 import de.pmcp.hungergames.CMDS.Adminmsg;
+import de.pmcp.hungergames.CMDS.Timer;
 import de.pmcp.hungergames.game.InfoBar;
-import de.pmcp.hungergames.game.death;
-import de.pmcp.hungergames.timer.BaseTimer;
-import de.pmcp.hungergames.timer.LaunchTimer;
-import de.pmcp.hungergames.timer.TabCompletion;
-import de.pmcp.hungergames.game.volcano;
-import de.pmcp.hungergames.CMDS.freeze;
-import de.pmcp.hungergames.tools.freezer;
+import de.pmcp.hungergames.game.Death;
+import de.pmcp.hungergames.game.DayTimer;
+import de.pmcp.hungergames.CMDS.TabCompletion;
+import de.pmcp.hungergames.CMDS.Freeze;
+import de.pmcp.hungergames.tools.Freezer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -28,17 +27,17 @@ public final class main extends JavaPlugin {
 
         //Befehle Registrieren
         newCommand("adminmsg", new Adminmsg());
-        newCommand("launchtimer", new LaunchTimer(), new TabCompletion());
-        newCommand("basetimer", new BaseTimer(), new TabCompletion());
-        newCommand("freeze", new freeze());
+        newCommand("freeze", new Freeze());
+        newCommand("timer", new Timer(), new TabCompletion());
 
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
         //pluginManager.registerEvents(new volcano(), this);
-        pluginManager.registerEvents(new freezer(), this);
-        freezer.effects();
-        pluginManager.registerEvents(new death(), this);
+        pluginManager.registerEvents(new Freezer(), this);
+        Freezer.effects();
+        pluginManager.registerEvents(new Death(), this);
         InfoBar.info();
+        DayTimer daytimer = new DayTimer(); daytimer.timer();
     }
 
     @Override

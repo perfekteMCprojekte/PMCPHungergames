@@ -33,7 +33,7 @@ public final class main extends JavaPlugin {
 
         //listener register
         PluginManager pluginManager = Bukkit.getPluginManager();
-        //pluginManager.registerEvents(new Volcano(), this);
+        pluginManager.registerEvents(new Volcano(), this);
         pluginManager.registerEvents(new Freezer(), this);
         Freezer.effects();
         pluginManager.registerEvents(new Death(), this);

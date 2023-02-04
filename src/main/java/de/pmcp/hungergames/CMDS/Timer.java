@@ -1,7 +1,6 @@
 package de.pmcp.hungergames.CMDS;
 
 import de.pmcp.hungergames.game.DayTimer;
-import de.pmcp.hungergames.game.Engine;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,17 +20,15 @@ public class Timer implements CommandExecutor {
                 DayTimer.timerPaused = true;
                 Bukkit.broadcastMessage("§e[§6Hungergames§e] Die Spiele wurden pausiert!");
                 break;
-            case "run":
-                if (!DayTimer.timerPaused) { sender.sendMessage("Die Spiele laufen gerade"); return true;}
+            case "resume":
+                if (!DayTimer.timerPaused) { sender.sendMessage("Die Spiele laufen gerade"); return true; }
                 DayTimer.timerPaused = false;
                 Bukkit.broadcastMessage("§e[§6Hungergames§e] Die Spiele gehen weiter!");
                 break;
             case "set":
                 if (args.length < 2) { sender.sendMessage("Gebe eine Sekundenzahl an auf die du den Timer setzen willst!"); return false; }
                 try {
-                    int newTime = Integer.parseInt(args[1]);
-                    if (DayTimer.time[0] > 0 && newTime <= 0) Engine.day --;
-                    DayTimer.time[0] = newTime;
+                    DayTimer.time[0] = Integer.parseInt(args[1]);
                     Bukkit.broadcastMessage("§e[§6Hungergames§e] Verbleibende Spielzeit auf §b" + DayTimer.time[0] + " §2Sekunden gesetzt!");
                 } catch (NumberFormatException e) {
                     sender.sendMessage("Gebe eine §lZahl§l an");

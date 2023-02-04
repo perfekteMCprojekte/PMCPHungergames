@@ -32,18 +32,19 @@ public class DayTimer {
                 if (dist == 5 && day > 1) Info.DailyNews();
             }
             //Start des Tages
-            else if (time[0] == 0)  {
-                Engine.day ++;
+            else if (time[0] == 0) {
+                Engine.day++;
                 Freeze.isfreeze = false;
-                for (Player player : Bukkit.getOnlinePlayers()) player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 0.8F);
+                for (Player player : Bukkit.getOnlinePlayers())
+                    player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 0.8F);
 
                 if (day == 1) {
                     Bukkit.broadcastMessage("§6§lDie Spiele sind gestartet: \n" + "§4§lViel Glück!");
-                }
-                else {
+                } else {
                     Bukkit.broadcastMessage("§6§lDer Tag ist gestartet: \n" + "§4§lViel Glück!");
-              //hier war mal das
+                    //hier war mal das
                 }
+            }
                 //Während dem Tag
             else if (time[0] < sessionLength) {
                 int dist = sessionLength - time[0]; //Abstand zum Ende des Tages

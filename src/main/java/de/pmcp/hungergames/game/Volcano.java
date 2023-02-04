@@ -23,6 +23,8 @@ public class Volcano implements Listener {
                 new Location(event.getPlayer().getWorld(),-979.52, 68.00, 384.34), vulcanoDrops[Random.rint(0, vulcanoDrops.length-1)], (byte) 0);
         block.setVelocity(new Vector(Random.rouble(-1, 1), Random.rouble(0.2, 4.0), Random.rouble(-1, 1)));
         block.setDropItem(false);
+
+        //runnable mit block
         
         //block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation(), 10, 0.1, 1.0,1.0,0, transition, true);
 

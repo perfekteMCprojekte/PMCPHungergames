@@ -1,6 +1,7 @@
 package de.pmcp.hungergames.game;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,7 @@ public class Death implements Listener {
         //Zählt die Tode, für Actionbar
         Player player = event.getEntity();
         if(!player.isOp()) {
+            event.getEntity().getWorld().playSound(event.getEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1000F, 0.1F);
             deathCount++;
             //Nimmt die DeathMessage für Daily News auf
             deathArray.add(event.getDeathMessage());

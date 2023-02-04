@@ -17,7 +17,7 @@ public class Death implements Listener {
 
     @EventHandler
     public static void death(@NotNull PlayerDeathEvent event) {
-        //Zählt die Tode, für Actionbar
+        //Bei Spielertod
         Player player = event.getEntity();
         if(!player.isOp()) {
             event.getEntity().getWorld().playSound(event.getEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1000F, 0.1F);
@@ -26,5 +26,6 @@ public class Death implements Listener {
             deathArray.add(event.getDeathMessage());
             Bukkit.getLogger().info(deathArray.toString());
         }
+        event.setDeathMessage(null);
     }
 }

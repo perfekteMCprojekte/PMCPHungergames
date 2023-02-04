@@ -1,7 +1,6 @@
 package de.pmcp.hungergames.game;
 
 import de.pmcp.hungergames.CMDS.Freeze;
-import de.pmcp.hungergames.CMDS.Timer;
 import de.pmcp.hungergames.game.Engine;
 import de.pmcp.hungergames.main;
 import org.apache.commons.lang.ArrayUtils;

@@ -17,13 +17,15 @@ public class Info implements Listener {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (Death.deathCount != 1) {
                         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§4Tag: §r§6" + Engine.day + " §r§4|| " + "§r§6" + Death.deathCount + " §r§4Leichen gefunden"));
-                    }   else {player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§4Tag: §r§6" + Engine.day + " §r§4|| " + "§r§6" + Death.deathCount + " §r§4Leiche gefunden"));}
+                    }
+                    else
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§4Tag: §6§l" + Engine.day + " §r§4|| " + "§r§6" + Death.deathCount + " §r§4Leiche gefunden"));}
                 }
             }
         }.runTaskTimer(main.plugin, 0, 10);
     }
     public static void DailyNews() {
-            Bukkit.broadcastMessage("§6§nDaily News: ");
+            Bukkit.broadcastMessage("\n§6§nDaily News: ");
             for (String deathMessageLoop : Death.deathArray) {
                 Bukkit.broadcastMessage("§4" + deathMessageLoop + "\n");
         }

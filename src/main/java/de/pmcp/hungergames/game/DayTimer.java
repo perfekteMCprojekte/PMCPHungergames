@@ -20,7 +20,6 @@ public class DayTimer {
     public void timer() {
         scheduler.runTaskTimer(main.plugin,task -> {
             if (timerPaused) return;
-
             if (time[0] < 0) {
                 int dist = time[0] * -1;
                 if (ArrayUtils.contains(timerPoints, dist))
@@ -31,15 +30,15 @@ public class DayTimer {
             }
             else if (time[0] == 0)  {
                 day += 1;
-                Bukkit.broadcastMessage("§6§nDaily News: ");
-                for (String deathMessageLoop : Death.deathArray) {
-                    Bukkit.broadcastMessage("§4" + deathMessageLoop + "\n");
-                }
                 if (day == 0)
                     Bukkit.broadcastMessage("§6§lDie Spiele sind gestartet: \n" + "§4§lViel Glück!");
                 else
                     Bukkit.broadcastMessage("§6§lDer Tag ist gestartet: \n" + "§4§lViel Glück!");
                 Freeze.isfreeze = false;
+                Bukkit.broadcastMessage("\n§6§nDaily News: ");
+                for (String deathMessageLoop : Death.deathArray) {
+                    Bukkit.broadcastMessage("§4" + deathMessageLoop + "\n");
+                }
             }
             else if (time[0] < sessionLength) {
                 int dist = sessionLength - time[0];

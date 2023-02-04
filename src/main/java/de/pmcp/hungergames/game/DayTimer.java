@@ -35,11 +35,8 @@ public class DayTimer {
                 else
                     Bukkit.broadcastMessage("§6§lDer Tag ist gestartet: \n" + "§4§lViel Glück!");
                 Freeze.isfreeze = false;
-                Bukkit.broadcastMessage("\n§6§nDaily News: ");
-                for (String deathMessageLoop : Death.deathArray) {
-                    Bukkit.broadcastMessage("§4" + deathMessageLoop + "\n");
+                Info.DailyNews();
                 }
-            }
             else if (time[0] < sessionLength) {
                 int dist = sessionLength - time[0];
                 if (ArrayUtils.contains(timerPoints, dist))

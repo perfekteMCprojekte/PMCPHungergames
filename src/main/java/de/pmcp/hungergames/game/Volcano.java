@@ -33,6 +33,7 @@ public class Volcano implements Listener {
             if (bombenalter[0] == bombe.getTicksLived()) {
                 bombe.getWorld().playSound(bombe.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 20F, 0.5F);
                 bombe.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, bombe.getLocation(), 10, 3, 3, 3, 0, null, true);
+                bombe.getWorld().createExplosion(bombe.getLocation(), (float) Random.rouble(2,5));
                 task.cancel();
             } bombenalter[0] = bombe.getTicksLived();
 

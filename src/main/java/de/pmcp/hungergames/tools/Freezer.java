@@ -48,7 +48,7 @@ public class Freezer implements Listener {
                     int i = 0;
                     player.sendTitle("║", "Bitte warten...", 1, 1, 12);
 
-                    if (player.isOp()) return;
+                    if (player.isOp()) continue;
                     player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 0, false, false));
                 }
 

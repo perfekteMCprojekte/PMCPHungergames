@@ -3,12 +3,10 @@ package de.pmcp.hungergames;
 //Hungergames Dateien
 import de.pmcp.hungergames.CMDS.Adminmsg;
 import de.pmcp.hungergames.CMDS.Timer;
-import de.pmcp.hungergames.game.Death;
-import de.pmcp.hungergames.game.DayTimer;
+import de.pmcp.hungergames.game.*;
 import de.pmcp.hungergames.CMDS.TabCompletion;
 import de.pmcp.hungergames.CMDS.Freeze;
-import de.pmcp.hungergames.game.Info;
-import de.pmcp.hungergames.game.Volcano;
+import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Freezer;
 
 import org.bukkit.Bukkit;
@@ -39,6 +37,8 @@ public final class main extends JavaPlugin {
         pluginManager.registerEvents(new Death(), this);
         Info.info();
         DayTimer daytimer = new DayTimer(); daytimer.timer();
+
+        Death.deathCount = Database.get();
     }
 
     @Override

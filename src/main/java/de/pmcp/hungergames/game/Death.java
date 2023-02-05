@@ -33,7 +33,7 @@ public class Death implements Listener {
             //Bukkit.getLogger().info(deathArray.toString());
         }
         //event.setDeathMessage(null);
-        Bukkit.getBanList(BanList.Type.NAME).addBan(event.getEntity().getDisplayName(), "§4Du bist Tod!\n§g geh nach Bielefeld.", null, null);
-        event.getEntity().kickPlayer("§4Du bist gestorben!\n§gDu hast 'gut' gekämpft.");
+        Bukkit.getBanList(BanList.Type.NAME).addBan(event.getEntity().getDisplayName(), "§4Du bist Tod!\n§g Danke fürs Spielen.", null, null);
+        event.getEntity().kickPlayer("§4Du bist gestorben!\n§gDu hast 'gut' gekämpft.\nDanke fürs Spielen");
     }
 }

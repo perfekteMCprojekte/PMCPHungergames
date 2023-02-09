@@ -15,7 +15,7 @@ public class Database implements Serializable {
     public static transient final long serialVersionUID = -1681012206529286330L;
 
 
-    //Liest daten aus dem Speicher/Config
+    //Liest daten aus dem Speicher
     public static int get() {
         try {
             FileInputStream filein = new FileInputStream("data.txt");
@@ -33,7 +33,7 @@ public class Database implements Serializable {
         }
     }
 
-    //Schreibt Daten in den Speicher/Config
+    //Schreibt Daten in den Speicher
     public static void write(int data) {
         try {
             FileOutputStream fileout = new FileOutputStream("data.txt"); //Dateioutput definieren
@@ -47,5 +47,15 @@ public class Database implements Serializable {
             e.printStackTrace();
             Bukkit.getLogger().info("FEHLER BEIM SPEICHERN");
         }
+    }
+
+    //Speichert die Variablen über write()
+    public static void save_data() {
+
+    }
+
+    //Packt den Inhalt der get() Datenbank in die Variablen
+    public static void load_data() {
+
     }
 }

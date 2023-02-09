@@ -6,13 +6,12 @@ import de.pmcp.hungergames.CMDS.Timer;
 import de.pmcp.hungergames.game.*;
 import de.pmcp.hungergames.CMDS.TabCompletion;
 import de.pmcp.hungergames.CMDS.Freeze;
-import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Freezer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -24,21 +23,18 @@ public final class main extends JavaPlugin {
         plugin = this;
         Bukkit.getLogger().info("§2PMCP Hungergames Plugin ist nun gestartet.");
 
-        //Befehle Registrieren
+        //Befehle registrieren
         newCommand("adminmsg", new Adminmsg());
         newCommand("freeze", new Freeze());
         newCommand("timer", new Timer(), new TabCompletion());
 
-        //listener register
-        PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new Volcano(), this);
-        pluginManager.registerEvents(new Freezer(), this);
-        Freezer.effects();
-        pluginManager.registerEvents(new Death(), this);
-        Info.info();
-        DayTimer daytimer = new DayTimer(); daytimer.timer();
+        //Event Listener registrieren
+        newEvent(new Volcano());
+        newEvent(new Freezer());
+        newEvent(new Death());
+        newEvent(new Engine());
 
-        Death.deathCount = Database.get();
+        Engine.main(); //Alles was beim Serverstart ausgeführt wird
     }
 
     @Override
@@ -46,6 +42,10 @@ public final class main extends JavaPlugin {
     Bukkit.broadcastMessage("§4Hungergames Plugin wird deaktiviert.");
     }
 
+    //Eventregisitrierung
+    private void newEvent(Listener eventfile) {
+        Bukkit.getPluginManager().registerEvents(eventfile, this);
+    }
 
     //Einfache Befehls Erstellung
     private void newCommand(String command, CommandExecutor cmdfile) {

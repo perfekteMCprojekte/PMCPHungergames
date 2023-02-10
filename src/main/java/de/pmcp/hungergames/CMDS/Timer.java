@@ -17,32 +17,35 @@ public class Timer implements CommandExecutor {
         //Verarbeitung der Aktion für den Timer
         switch (args[0]) {
             case "pause":
-                if (DayTimer.timerPaused) { sender.sendMessage("Die Spiele sind bereits pausiert"); return true; }
+                if (DayTimer.timerPaused) { sender.sendMessage("§e[§6Hungergames§e]§7 Die Spiele sind bereits pausiert"); return true; }
                 DayTimer.timerPaused = true;
-                Bukkit.broadcastMessage("§e[§6Hungergames§e] Die Spiele wurden pausiert!");
+                sender.sendMessage("§e[§6Hungergames§e]§7 Die Spiele wurden pausiert!");
                 break;
             case "run":
-                if (!DayTimer.timerPaused) { sender.sendMessage("Die Spiele laufen gerade"); return true; }
+                if (!DayTimer.timerPaused) { sender.sendMessage("§e[§6Hungergames§e]§7 Die Spiele laufen gerade"); return true; }
                 DayTimer.timerPaused = false;
-                Bukkit.broadcastMessage("§e[§6Hungergames§e] Die Spiele gehen weiter!");
+                sender.sendMessage("§e[§6Hungergames§e]§7 Die Spiele gehen weiter!");
                 break;
             case "set":
-                if (args.length < 2) { sender.sendMessage("Gebe eine Sekundenzahl an auf die du den Timer setzen willst!"); return false; }
+                if (args.length < 2) { sender.sendMessage("§e[§6Hungergames§e]§8 Gebe eine Sekundenzahl für den Timer an (negativ vor Start)!"); return false; }
                 try {
-                    int newTime = Integer.parseInt(args[1]);
-                    if (DayTimer.time[0] > 0 && newTime <= 0) Engine.day --;
-                    DayTimer.time[0] = newTime;
-                    Bukkit.broadcastMessage("§e[§6Hungergames§e] Verbleibende Spielzeit auf §b" + DayTimer.time[0] + " §2Sekunden gesetzt!");
-                } catch (NumberFormatException e) {
-                    sender.sendMessage("Gebe eine §lZahl§l an");
+                    int newTime = Integer.parseInt(args[1]); //Zahl auslesen
+                    if (DayTimer.time >= 0 && newTime < 0) Engine.day --; //Tag korrigieren bei entsprechender Zeitänderung
+                    else if (DayTimer.time < 0 && newTime >= 0) Engine.day++;
+                    DayTimer.time = newTime; //Aktualisieren
+
+                    if (DayTimer.time < 0) Bukkit.broadcastMessage("§e[§6Hungergames§e]§4 Der Tag startet in §c" + DayTimer.time*-1 + " §4Sekunden!");
+                    else Bukkit.broadcastMessage("§e[§6Hungergames§e]§4 Der Tag geht noch §c" + (DayTimer.sessionLength - DayTimer.time) + " §4Sekunden!");
+                } catch (NumberFormatException e) { //Bei Zahlfehler
+                    sender.sendMessage("§e[§6Hungergames§e]§7 Gebe eine §lZahl§l an");
                     return false;
                 }
                 break;
             case "status":
-                sender.sendMessage("§6 Die Spiele sind gerade" + (DayTimer.timerPaused ? " §lpausiert§l " : " ") + " bei §b" + DayTimer.time[0] + "§6 Sekunden");
+                sender.sendMessage("§e[§6Hungergames§e]§7 Die Spiele sind gerade" + (DayTimer.timerPaused ? " §8pausiert§7" : "") + " bei §8" + DayTimer.time + "§7 Sekunden");
                 break;
             default:
-                sender.sendMessage("Ungültige Aktion: §o" + args[0]);
+                sender.sendMessage("§e[§6Hungergames§e]§7 Ungültige Aktion: §o" + args[0]);
                 return false;
         }
         //Ende von OnCommand

@@ -1,7 +1,6 @@
 package de.pmcp.hungergames.game;
 
 import de.pmcp.hungergames.CMDS.Freeze;
-import de.pmcp.hungergames.game.Engine;
 import de.pmcp.hungergames.main;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
@@ -10,20 +9,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class DayTimer {
-    int minutes = 40; //Sessiondauer Angeben
-    final int[] timerPoints = {60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Benachrichtigungsstände als Abstand zum Punkt Null
-    int sessionLength = minutes * 60;
-    public static int[] time = {-10};
+    public static int sessionLength = 40 * 60; //Sessiondauer Angeben (min * sek)
+    final static int[] timerPoints = {60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Benachrichtigungsstände als Abstand zum Punkt Null
+    public static int time = -10;
     public static boolean timerPaused = true;
-    BukkitScheduler scheduler = Bukkit.getScheduler();
 
-    public void timer() {
+    public static void timer() {
+        BukkitScheduler scheduler = Bukkit.getScheduler();
         int day = Engine.day;
-        scheduler.runTaskTimer(main.plugin,task -> {
+        scheduler.runTaskTimer(main.plugin,task -> { //Timer für Spielzeit
+            //Tageszeit berechnen und setzen (sonnenaufgang bis mitternacht)
+            int dayTime = (time * (20000 / sessionLength))-1100;
+            Bukkit.getWorlds().get(0).setTime(dayTime);
+
             if (timerPaused) return;
             //Start des Countdowns
-            if (time[0] < 0) {
-                int dist = time[0] * -1; //Abstand zum start des Tages
+            if (time < 0) {
+                int dist = time * -1; //Abstand zum start des Tages
                 if (ArrayUtils.contains(timerPoints, dist))
                     if (day == 0)
                         Bukkit.broadcastMessage("§e[§6Hungergames§e] §4Der Tag beginnt in §c" + (dist <= -60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
@@ -32,7 +34,7 @@ public class DayTimer {
                 if (dist == 5 && day > 1) Info.DailyNews();
             }
             //Start des Tages
-            else if (time[0] == 0) {
+            else if (time == 0) {
                 Engine.day++;
                 Freeze.isfreeze = false;
                 for (Player player : Bukkit.getOnlinePlayers())
@@ -46,8 +48,8 @@ public class DayTimer {
                 }
             }
                 //Während dem Tag
-            else if (time[0] < sessionLength) {
-                int dist = sessionLength - time[0]; //Abstand zum Ende des Tages
+            else if (time < sessionLength) {
+                int dist = sessionLength - time; //Abstand zum Ende des Tages
                 if (ArrayUtils.contains(timerPoints, dist))
                     if (day == 7)
                         Bukkit.broadcastMessage("§e[§6Hungergames§e] §4Die Spiele laufen noch §c" + (dist >= 60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
@@ -63,10 +65,10 @@ public class DayTimer {
                 Info.DailyNews();
                 Freeze.isfreeze = true;
                 timerPaused = true;
-                time[0] = -11;
+                time = -11;
             }
 
-            time[0] ++;
+            time ++;
             }, 0, 20);
     }
 }

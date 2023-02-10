@@ -9,17 +9,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class Freeze implements CommandExecutor {
     public static boolean isfreeze = true;
+    //Wird bei Spielstart deaktiviert
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (isfreeze) {
             isfreeze = false;
             DayTimer.timerPaused = false;
-            Bukkit.getLogger().info("Es wurde entpauseriert.");
+            Bukkit.getLogger().info("§7Es wurde entpauseriert.");
         } else {
             isfreeze = true;
             DayTimer.timerPaused = true;
-            Bukkit.getLogger().info("Es wurde pauseriert.");
+            Bukkit.getLogger().info("§7Es wurde pauseriert.");
         }
         return false;
     }

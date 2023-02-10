@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 public class Info implements Listener {
 
-    public static void info() {
+    public static void main() {
         BukkitScheduler scheduler = Bukkit.getScheduler();
         scheduler.runTaskTimer(main.plugin, task -> { //Timer für timer
             //Füllt die Actionbar mit "Tag" und "Todesanzahl" aus
@@ -21,7 +21,7 @@ public class Info implements Listener {
                 } else {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§4Tag: §6§l" + Engine.day + " §r§4|| " + "§r§6" + Death.deathCount + " §r§4Leiche gefunden"));
                 }
-            };
+            }
         }, 0, 20); //Timings für Info
     }
     //Für Tagesnachrichten

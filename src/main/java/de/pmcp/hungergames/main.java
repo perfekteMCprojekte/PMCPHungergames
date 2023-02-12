@@ -6,9 +6,11 @@ import de.pmcp.hungergames.CMDS.Timer;
 import de.pmcp.hungergames.game.*;
 import de.pmcp.hungergames.CMDS.TabCompletion;
 import de.pmcp.hungergames.CMDS.Freeze;
+import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Freezer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.event.Listener;
@@ -29,17 +31,18 @@ public final class main extends JavaPlugin {
         newCommand("timer", new Timer(), new TabCompletion());
 
         //Event Listener registrieren
-        newEvent(new Volcano());
         newEvent(new Freezer());
         newEvent(new Death());
         newEvent(new Engine());
 
+        Bukkit.getWorlds().get(0).setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false); //Tageszeit auf manuell
         Engine.main(); //Alles was beim Serverstart ausgeführt wird
     }
 
     @Override
     public void onDisable() { // Plugin shutdown logic
-    Bukkit.broadcastMessage("§4Hungergames Plugin wird deaktiviert.");
+        Database.save_data();
+        Bukkit.broadcastMessage("§4Hungergames Plugin wird deaktiviert.");
     }
 
     //Eventregisitrierung

@@ -1,5 +1,7 @@
 package de.pmcp.hungergames.tools;
 
+import de.pmcp.hungergames.game.Death;
+import de.pmcp.hungergames.game.Engine;
 import org.bukkit.Bukkit;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -8,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -16,30 +20,30 @@ public class Database implements Serializable {
 
 
     //Liest daten aus dem Speicher
-    public static int get() {
+    public static HashMap<String, Object> get() {
         try {
-            FileInputStream filein = new FileInputStream("data.txt");
+            FileInputStream filein = new FileInputStream("pmcp-data.txt");
             GZIPInputStream gzin = new GZIPInputStream(filein);
             BukkitObjectInputStream in = new BukkitObjectInputStream(gzin);
-            int data = in.readInt();
+            HashMap<String, Object> data = (HashMap<String, Object>) in.readObject();
             in.close();
 
             return data;
         }
-        catch (IOException e) {
+        catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             Bukkit.getLogger().info("FEHLER BEIM LADEN");
-            return 0;
+            return null;
         }
     }
 
     //Schreibt Daten in den Speicher
-    public static void write(int data) {
+    public static void write(HashMap<String, Object> data) {
         try {
-            FileOutputStream fileout = new FileOutputStream("data.txt"); //Dateioutput definieren
+            FileOutputStream fileout = new FileOutputStream("pmcp-data.txt"); //Dateioutput definieren
             GZIPOutputStream gzout = new GZIPOutputStream(fileout); //Daten komprimieren
             BukkitObjectOutputStream out = new BukkitObjectOutputStream(gzout); //Daten für Speicherung vorbereiten
-            out.writeInt(data);
+            out.writeObject(data);
             out.close(); //Output schließen
 
         }
@@ -51,11 +55,19 @@ public class Database implements Serializable {
 
     //Speichert die Variablen über write()
     public static void save_data() {
-
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("day", Engine.day);
+        data.put("deathcount", Death.deathCount);
+        data.put("deathmessages", Death.deathMessages);
+        write(data);
     }
 
     //Packt den Inhalt der get() Datenbank in die Variablen
     public static void load_data() {
-
+        HashMap<String, Object> map = get();
+        if (map == null || map.isEmpty()) {Bukkit.getLogger().info("Keine Daten in Datei vorhanden"); return;}
+        Engine.day = (int) map.get("day");
+        Death.deathCount = (int) map.get("deathcount");
+        Death.deathMessages = (ArrayList<String>) map.get("deathmessages");
     }
 }

@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 public class DayTimer {
     public static int sessionLength = 40 * 60; //Sessiondauer Angeben (min * sek)
     final static int[] timerPoints = {60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Benachrichtigungsstände als Abstand zum Punkt Null
-    public static int time = -10;
+    public static int time = -10; //VORBEREITUNGSZEIT BITTE ÄNDERN
     public static boolean timerPaused = true;
 
     public static void timer() {
@@ -65,7 +65,7 @@ public class DayTimer {
                 Info.DailyNews();
                 Freeze.isfreeze = true;
                 timerPaused = true;
-                time = -11;
+                time = -601;
             }
 
             time ++;

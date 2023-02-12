@@ -21,7 +21,7 @@ public class Death implements Listener {
     public void create_death_message(String victim, String killer, String cause) {
         String message = "ERROR";
         Bukkit.broadcastMessage("->"+cause+"<-");
-        if (killer == null) {
+        if (!killer.equals("")) {
             if (cause.contains("burned")) message = victim + " war Feuer und Flamme ";
             else message = victim + " erlitt einen tragischen Unfall ";
         }
@@ -47,7 +47,7 @@ public class Death implements Listener {
         deathCount++;
 
         //Bei Tod
-        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1000F, 0.1F);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 100F, 0.5F);
         player.getWorld().dropItemNaturally(player.getLocation(), Item.create(Material.EGG, 2, "Kniescheibe", "Eine wertvolle Ressource\nVon:" + player.getDisplayName()));
         Volcano.erupt(Random.rint(40, 85), Random.rint(1,2));
 

@@ -3,6 +3,8 @@ package de.pmcp.hungergames.game;
 import de.pmcp.hungergames.main;
 import de.pmcp.hungergames.tools.Random;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -13,6 +15,7 @@ import org.bukkit.util.Vector;
 public class Volcano implements Listener {
     static World world = Bukkit.getWorlds().get(0);
     static Location loc = new Location(world, -980.00, 70.00, 384.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
+    static Material[] vulcanoDrops = {Material.MAGMA_BLOCK, Material.MAGMA_BLOCK, Material.OBSIDIAN, Material.ANDESITE, Material.TUFF, Material.TUFF}; //Materialien für Vulkanbomben
     static int timeErupting = 0;
     static boolean isErupting = false;
 
@@ -21,13 +24,13 @@ public class Volcano implements Listener {
     //Vulkanbombem
     public static void spit() {
         BukkitScheduler scheduler = Bukkit.getScheduler();
-        Material[] vulcanoDrops = {Material.MAGMA_BLOCK, Material.ANDESITE}; //Materialien für Vulkanbomben
         Particle.DustTransition transition = new Particle.DustTransition(Color.fromRGB(255, 200, 100), Color.fromRGB(128, 0, 0), 4F);
 
         //Die Vulkanbombe erstellen
         FallingBlock bombe = world.spawnFallingBlock(loc, vulcanoDrops[Random.rint(0, vulcanoDrops.length-1)], (byte) 0);
         bombe.setVelocity(new Vector(Random.rouble(-1, 1), Random.rouble(0.2, 4.0), Random.rouble(-1, 1)));
         bombe.setDropItem(false);
+        world.playSound(bombe.getLocation(), Sound.ENTITY_WITHER_HURT, 6F, 0.5F);
 
         final int[] bombenalter = {-1};
 
@@ -44,9 +47,6 @@ public class Volcano implements Listener {
 
             //Während des Fluges
             world.spawnParticle(Particle.REDSTONE, bombloc, Random.rint(3, 8), 0.5, 0.5,0.5,0, transition, true);
-            world.playSound(bombloc, Sound.BLOCK_LAVA_EXTINGUISH, 6F, 2F);
-            for (Player player : Bukkit.getOnlinePlayers())
-                if (player.getNearbyEntities(96, 96, 96).contains(bombe)) player.playSound(bombloc, Sound.BLOCK_LAVA_EXTINGUISH, 6F, 2F);
         }, 0, 2); //Timings
     }
 
@@ -55,10 +55,12 @@ public class Volcano implements Listener {
         final int strength = strenth;
         if (isErupting) return; //Vulkan soll nicht doppelt ausbrechen
         isErupting = true;
+
+        //Vulkantimer (Vulkanausbruch)
         BukkitScheduler scheduler = Bukkit.getScheduler();
-        scheduler.runTaskTimer(main.plugin, task -> { //Vulkantimer
+        scheduler.runTaskTimer(main.plugin, task -> {
             //Abrechen des Ausbruchs
-            if (timeErupting > duration/**4*/) {
+            if (timeErupting > duration) {
                 timeErupting = 0;
                 isErupting = false;
                 task.cancel();
@@ -68,8 +70,20 @@ public class Volcano implements Listener {
             if (Random.rint(strength, 8) == 6) world.spawnParticle(Particle.REDSTONE, loc, 1, 2, 2, 2, 0, smoke, true);
             world.spawnParticle(Particle.SMOKE_LARGE, loc, 1, 2, 2, 2, 0, null, true);
             if (Random.rint(strength, 16) == 6) world.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 10F, 0.6F);
+            if (Random.rint(0, 50) == 0) world.playSound(loc, Sound.ENTITY_WITCH_AMBIENT, 7F, 0.5F);
 
             timeErupting++;
         }, 100, 5); //Timings
+
+        //Soundschleife (soll noch überabeitet werden)
+        scheduler.runTaskTimer(main.plugin, task -> {
+            if (!isErupting) task.cancel();
+            for (Player player : Bukkit.getOnlinePlayers())
+                for (Entity entity : player.getNearbyEntities(80, 80, 80))
+                    if (entity.getType() == EntityType.FALLING_BLOCK) {
+                        player.playSound(entity.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 5F, 2F);
+                        break;
+                    }
+        }, 100, 3);
     }
 }

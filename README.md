@@ -12,3 +12,5 @@ Ja, ich rede mit dir, Silas
 VOR DEM LADEN DES PROJEKTS AUF DEM SERVER MÜSSEN FOLGENDE WERTE EINGESTELLT WERDEN:
 -Vulkankoordinaten in Volcano
 -Vorbereitungszeit in DayTimer
+-player.isOp statement in Death
+-Spieler ban/kick Befehle in Death

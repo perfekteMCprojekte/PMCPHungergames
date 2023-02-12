@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,8 +17,11 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.util.HashMap;
+
 public class Engine implements Listener {
     public static int day = 0; // 0 vor beginn, startet bei 1
+    HashMap<Player, String> chatHistory = new HashMap<Player, String>(); //Für Speicherung der letzten Nachricht eines Spielers
 
     public static void main() {
         //Funktionen beim Serverstart
@@ -25,8 +29,7 @@ public class Engine implements Listener {
         Info.main();
         DayTimer.timer();
 
-        Death.deathCount = Database.get();
-        Database.load_data();
+        Database.load_data(); //Variablen initialisieren
 
         //Hide Nametag team erstellen wenn nicht vorhanden
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
@@ -62,5 +65,11 @@ public class Engine implements Listener {
         Player player = event.getPlayer();
         if (!player.getScoreboard().getTeams().contains("hide_nametag")) //Spieler ins hide_nametags team hinzufügen
             player.getScoreboard().getTeam("hide_nametag").addEntry(player.getName());
+    }
+
+    @EventHandler
+    public void chatProtectTM(AsyncPlayerChatEvent event) {
+        chatHistory.remove(event.getPlayer());
+        chatHistory.put(event.getPlayer(), event.getMessage());
     }
 }

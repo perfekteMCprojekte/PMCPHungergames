@@ -27,7 +27,7 @@ public class Info implements Listener {
     //Für Tagesnachrichten
     public static void DailyNews() {
             Bukkit.broadcastMessage("\n§6§nDaily News: ");
-            for (String deathMessageLoop : Death.deathArray) {
+            for (String deathMessageLoop : Death.deathMessages) {
                 Bukkit.broadcastMessage("§4" + deathMessageLoop + "\n");
         }
     }

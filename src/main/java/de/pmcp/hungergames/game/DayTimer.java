@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 public class DayTimer {
     public static int sessionLength = 40 * 60; //Sessiondauer Angeben (min * sek)
     final static int[] timerPoints = {60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Benachrichtigungsstände als Abstand zum Punkt Null
-    public static int time = -10;
+    public static int time = -10; //VORBEREITUNGSZEIT BITTE ÄNDERN
     public static boolean timerPaused = true;
 
     public static void timer() {
@@ -37,8 +37,10 @@ public class DayTimer {
             else if (time == 0) {
                 Engine.day++;
                 Freeze.isfreeze = false;
-                for (Player player : Bukkit.getOnlinePlayers())
-                    player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 0.8F);
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
+                    player.playSound(player, Sound.ENTITY_WITHER_SPAWN, 10F, 0.5F);
+                }
 
                 if (day == 1) {
                     Bukkit.broadcastMessage("§6§lDie Spiele sind gestartet: \n" + "§4§lViel Glück!");
@@ -57,15 +59,18 @@ public class DayTimer {
                         Bukkit.broadcastMessage("§e[§6Hungergames§e] §4Der Tag endet in §c" + (dist >= 60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
             }
                 //Ende des Tages
-            else {
+            else if (time <= sessionLength+30) {
+                for (Player player : Bukkit.getOnlinePlayers()) player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
                 if (day == 7)
                     Bukkit.broadcastMessage("§6§lDie Spiele sind geendet!");
                 else
                     Bukkit.broadcastMessage("§6§lDer Tag ist geendet!");
                 Info.DailyNews();
                 Freeze.isfreeze = true;
+            }
+            else {
+                for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§4Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");
                 timerPaused = true;
-                time = -11;
             }
 
             time ++;

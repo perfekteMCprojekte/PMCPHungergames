@@ -64,6 +64,7 @@ public class DayTimer {
                     Bukkit.broadcastMessage("§6§lDer Tag ist geendet!");
                 Freeze.isfreeze = true;
             }
+            //Tagesschau
             else if (time == sessionLength+20) Info.nachrichten();
             //Ende
             else if (time >= sessionLength+60) {

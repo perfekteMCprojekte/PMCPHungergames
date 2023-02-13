@@ -62,11 +62,11 @@ public class DayTimer {
                     Bukkit.broadcastMessage("§6§lDie Spiele sind geendet!");
                 else
                     Bukkit.broadcastMessage("§6§lDer Tag ist geendet!");
-                Info.nachrichten();
                 Freeze.isfreeze = true;
             }
+            else if (time == sessionLength+20) Info.nachrichten();
             //Ende
-            else if (time >= sessionLength+30) {
+            else if (time >= sessionLength+60) {
                 for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§4Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");
                 timerPaused = true;
             }

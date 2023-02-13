@@ -35,11 +35,12 @@ public class Info implements Listener {
         Bukkit.broadcastMessage( (DayTimer.time < 0) ? "§6Letztes mal bei Hungergames: " : "§6Hier ist das erste Deutsche Fernsehen \nmit der Tagesschau:");
 
         //Nachrichtenausgabe
+        if (Death.deathMessages.isEmpty()) return;
         final int[] i = {0};
-        int x = Death.deathMessages.size();
         Bukkit.getScheduler().runTaskTimer(main.plugin,task -> {
             Bukkit.broadcastMessage("§4| " + Death.deathMessages.get(i[0]));
-            if (i[0] < x) i[0]++; else task.cancel();
+            i[0]++;
+            if (i[0] == Death.deathMessages.size()) task.cancel();
         }, 50, 20);
         Bukkit.broadcastMessage("§8-------");
     }

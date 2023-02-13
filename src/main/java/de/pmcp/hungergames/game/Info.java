@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -25,10 +26,22 @@ public class Info implements Listener {
         }, 0, 20); //Timings für Info
     }
     //Für Tagesnachrichten
-    public static void DailyNews() {
-            Bukkit.broadcastMessage("\n§6§nDaily News: ");
-            for (String deathMessageLoop : Death.deathMessages) {
-                Bukkit.broadcastMessage("§4" + deathMessageLoop + "\n");
+    public static void nachrichten() {
+        Bukkit.broadcastMessage("§8-------");
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player, Sound.BLOCK_BELL_RESONATE, 10F, 0.8F);
+            player.playSound(player, Sound.BLOCK_BELL_USE, 10F, 1F);
         }
+        Bukkit.broadcastMessage( (DayTimer.time < 0) ? "§6Letztes mal bei Hungergames: " : "§6Hier ist das erste Deutsche Fernsehen \nmit der Tagesschau:");
+
+        //Nachrichtenausgabe
+        if (Death.deathMessages.isEmpty()) return;
+        final int[] i = {0};
+        Bukkit.getScheduler().runTaskTimer(main.plugin,task -> {
+            Bukkit.broadcastMessage("§4| " + Death.deathMessages.get(i[0]));
+            i[0]++;
+            if (i[0] == Death.deathMessages.size()) task.cancel();
+        }, 50, 20);
+        Bukkit.broadcastMessage("§8-------");
     }
 }

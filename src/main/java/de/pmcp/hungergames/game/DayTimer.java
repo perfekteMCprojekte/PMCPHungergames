@@ -40,7 +40,7 @@ public class DayTimer {
                 }
 
                 if (day == 1) {
-                    Bukkit.broadcastMessage("§6§lDie Spiele sind gestartet: \n" + "§4§lViel Glück!");
+                    Bukkit.broadcastMessage("§6§lSo mögen die Spiele beginnen: \n" + "§4§lViel Glück!");
                 } else {
                     Bukkit.broadcastMessage("§6§lDer Tag ist gestartet: \n" + "§4§lViel Glück!");
                     //hier war mal das
@@ -68,7 +68,7 @@ public class DayTimer {
             else if (time == sessionLength+20) Info.nachrichten();
             //Ende
             else if (time >= sessionLength+60) {
-                for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§4Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");
+                for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§6Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");
                 timerPaused = true;
             }
 

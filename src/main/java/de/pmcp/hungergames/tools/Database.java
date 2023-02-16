@@ -3,9 +3,12 @@ package de.pmcp.hungergames.tools;
 import de.pmcp.hungergames.game.Death;
 import de.pmcp.hungergames.game.Engine;
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 
+import javax.xml.crypto.Data;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +27,7 @@ public class Database implements Serializable {
         try {
             FileInputStream filein = new FileInputStream("pmcp-data.txt");
             GZIPInputStream gzin = new GZIPInputStream(filein);
-            BukkitObjectInputStream in = new BukkitObjectInputStream(gzin);
+            BukkitObjectInputStream in = new BukkitObjectInputStream(filein);
             HashMap<String, Object> data = (HashMap<String, Object>) in.readObject();
             in.close();
 
@@ -42,7 +45,7 @@ public class Database implements Serializable {
         try {
             FileOutputStream fileout = new FileOutputStream("pmcp-data.txt"); //Dateioutput definieren
             GZIPOutputStream gzout = new GZIPOutputStream(fileout); //Daten komprimieren
-            BukkitObjectOutputStream out = new BukkitObjectOutputStream(gzout); //Daten für Speicherung vorbereiten
+            BukkitObjectOutputStream out = new BukkitObjectOutputStream(fileout); //Daten für Speicherung vorbereiten
             out.writeObject(data);
             out.close(); //Output schließen
 
@@ -58,7 +61,8 @@ public class Database implements Serializable {
         HashMap<String, Object> data = new HashMap<>();
         data.put("day", Engine.day);
         data.put("deathcount", Death.deathCount);
-        data.put("deathmessages", Death.deathMessages);
+        data.put("deathmessages", Engine.news);
+        data.put("explosives", Engine.explosives);
         write(data);
     }
 
@@ -68,6 +72,7 @@ public class Database implements Serializable {
         if (map == null || map.isEmpty()) {Bukkit.getLogger().info("Keine Daten in Datei vorhanden"); return;}
         Engine.day = (int) map.get("day");
         Death.deathCount = (int) map.get("deathcount");
-        Death.deathMessages = (ArrayList<String>) map.get("deathmessages");
+        Engine.news = (ArrayList<String>) map.get("deathmessages");
+        Engine.explosives = (ArrayList<int[]>) map.get("explosives");
     }
 }

@@ -11,14 +11,12 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -26,9 +24,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Engine implements Listener {
     public static int day = 0; //0 vor beginn, startet bei 1
@@ -69,6 +65,7 @@ public class Engine implements Listener {
             //Berstende Kniescheiben
             if (DayTimer.time > 600) {
             for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.isOp()) continue;
                 if (Random.rint(1, 3600) == 1) {
                     player.playSound(player, Sound.ENTITY_PLAYER_HURT, 1, 1);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Random.rint(33, 76), 1, false, false));
@@ -78,14 +75,16 @@ public class Engine implements Listener {
             }}
 
             //Vulkanausbrüche
-            if (Random.rint(1, 1200) == 1 && DayTimer.time > 120) Volcano.erupt(Random.rint(65, 346), Random.rint(1,5));
+            if (DayTimer.time > 120 && Random.rint(1, 12) == 1) Volcano.erupt(Random.rint(65, 346), Random.rint(1,5));
 
             //Goodies
             for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.isOp()) continue;
                 if (Random.rint(1, 1456) == 1) { //Lost für Spieler aus
-                    player.getInventory().addItem(playerGifts[Random.rint(0, playerGifts.length)]); //Lost Drop aus
-                    player.sendMessage("§e[§6Hungergames§e] §g Due erhälst " + " von einem unbekannten Sponsor");
-                    news.add(player.getName() + " erhielt " + " von einem unbekannten Sponsor");
+                    ItemStack item = playerGifts[Random.rint(0, playerGifts.length)]; //Lost Drop aus
+                    player.getInventory().addItem(item);
+                    player.sendMessage("§e[§6Hungergames§e] §g Due erhälst " + item.getItemMeta().getDisplayName() + " von einem unbekannten Sponsor");
+                    news.add("§e" + player.getName() + " erhielt " + item.getItemMeta().getDisplayName() + " von einem unbekannten Sponsor");
                 }
             }
 
@@ -116,6 +115,7 @@ public class Engine implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         world.playSound(center, Sound.BLOCK_BEACON_ACTIVATE, 1000, 2);
+        if (player.isOp()) Info.bar.addPlayer(player); //Infobar für ops anzeigen
         if (!player.getScoreboard().getTeams().contains("hide_nametag")) //Spieler ins hide_nametags team hinzufügen
             player.getScoreboard().getTeam("hide_nametag").addEntry(player.getName());
     }
@@ -164,7 +164,7 @@ public class Engine implements Listener {
         explosives.add(coords);
         event.getBlockPlaced().setMetadata("owner", new FixedMetadataValue(main.plugin, event.getPlayer()));
         event.getPlayer().sendMessage("§7 Du hast eine Sprengfalle Platziert");
-        event.getPlayer().playSound(event.getPlayer(), Sound.BLOCK_NOTE_BLOCK_BIT, 1F, 0.7F);
+        world.playSound(block.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1F, 0.7F);
     }
     //Sprengstoff abbauen
     //@EventHandler

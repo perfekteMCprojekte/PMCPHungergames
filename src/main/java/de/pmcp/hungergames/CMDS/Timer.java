@@ -41,6 +41,18 @@ public class Timer implements CommandExecutor {
                     return false;
                 }
                 break;
+            case "setday":
+                if (args.length < 2) { sender.sendMessage("§e[§6Hungergames§e]§8 Gebe eine Tageszahl an (0-7)"); return false; }
+                try {
+                    int newDay = Integer.parseInt(args[1]); //Zahl auslesen
+                    if (newDay < 0 || newDay > 7) { sender.sendMessage("§e[§6Hungergames§e]§8 Tag muss zwischen 0 und 7 liegen)"); return false; }
+                    Engine.day = newDay; //Aktualisieren
+                    Bukkit.broadcastMessage("§e[§6Hungergames§e]§4 Die Spiele wurden auf Tag §c" + Engine.day + " §4Gesetzt!");
+                } catch (NumberFormatException e) { //Bei Zahlfehler
+                    sender.sendMessage("§e[§6Hungergames§e]§7 Gebe eine §lZahl§l an");
+                    return false;
+                }
+                break;
             case "status":
                 sender.sendMessage("§e[§6Hungergames§e]§7 Die Spiele sind gerade" + (DayTimer.timerPaused ? " §8pausiert§7" : "") + " bei §8" + DayTimer.time + "§7 Sekunden");
                 break;

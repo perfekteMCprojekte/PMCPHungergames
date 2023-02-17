@@ -34,7 +34,7 @@ public class Database implements Serializable {
             return data;
         }
         catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             Bukkit.getLogger().info("FEHLER BEIM LADEN");
             return null;
         }

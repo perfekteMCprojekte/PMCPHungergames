@@ -17,9 +17,11 @@ public class TabCompletion implements TabCompleter {
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (command.getName().equals("timer")) {
             if (args.length == 1)
-                return Arrays.asList((DayTimer.timerPaused ? "run" : "pause"), "set", "status");
-            else if (args[0].equals("set") && args.length == 2)
-                return Arrays.asList("-600", "-60", "0", "600", "1200", "1800", "2400");
+                return Arrays.asList((DayTimer.timerPaused ? "run" : "pause"), "set", "status", "setday");
+            else if (args.length == 2){
+                if (args[0].equals("set")) return Arrays.asList("-600", "-60", "0", "600", "1200", "1800", "2400", "2395");
+                if (args[0].equals("setday")) return Arrays.asList("0", "3", "7");
+            }
 
         }
         return Arrays.asList();

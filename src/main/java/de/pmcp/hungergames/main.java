@@ -42,6 +42,7 @@ public final class main extends JavaPlugin {
     @Override
     public void onDisable() { // Plugin shutdown logic
         Database.save_data();
+        Info.bar.removeAll();
         Bukkit.broadcastMessage("§4Hungergames Plugin wird deaktiviert.");
     }
 

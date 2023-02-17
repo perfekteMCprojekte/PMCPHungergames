@@ -2,6 +2,7 @@ package de.pmcp.hungergames.game;
 
 import de.pmcp.hungergames.CMDS.Freeze;
 import de.pmcp.hungergames.main;
+import de.pmcp.hungergames.tools.Random;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -26,7 +27,9 @@ public class DayTimer {
                 int dist = time * -1; //Abstand zum start des Tages
                 if (ArrayUtils.contains(timerPoints, dist))
                     Bukkit.broadcastMessage("§e[§6Hungergames§e] §4"+ ((day == 0) ? "§4Die Spiele starten in §c": "§4Der Tag beginnt in §c") + (dist <= -60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
-                if (time == -120 && day > 1) Info.nachrichten();
+                if (time == -100 && day > 1) Info.nachrichten();
+                if (time == -540) Engine.world.playSound(Engine.center, (Random.rint(0,1)==1) ? Sound.MUSIC_DISC_PIGSTEP : Sound.MUSIC_DISC_CHIRP, 1000F, 1F); //Wartemusik
+                else if (time == -350) Engine.world.playSound(Engine.center, (Random.rint(0,1)==1) ? Sound.MUSIC_DISC_OTHERSIDE : Sound.MUSIC_DISC_WAIT, 1000F, 1F); //Wartemusik
             }
             //Start des Tages
             else if (time == 0) {

@@ -14,7 +14,6 @@ public class DayTimer {
     public static boolean timerPaused = true;
 
     public static void timer() {
-        Engine.day = 2; //Für Tagesübergreifende Tests
         int day = Engine.day;
         Bukkit.getScheduler().runTaskTimer(main.plugin,task -> { //Timer für Spielzeit
             //Tageszeit berechnen und setzen (sonnenaufgang bis mitternacht)

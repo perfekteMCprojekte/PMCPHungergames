@@ -14,12 +14,11 @@ import org.bukkit.util.Vector;
 //Effekte für einen Vulkan
 public class Volcano implements Listener {
     static World world = Engine.world;
-    static Location loc = new Location(world, -980.00, 70.00, 384.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
+    //29 102 5
+    static Location loc = new Location(world, 29.00, 102.00, 5.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
     static Material[] vulcanoDrops = {Material.MAGMA_BLOCK, Material.MAGMA_BLOCK, Material.OBSIDIAN, Material.ANDESITE, Material.TUFF, Material.TUFF}; //Materialien für Vulkanbomben
     static int timeErupting = 0;
     static boolean isErupting = false;
-
-    static Particle.DustTransition smoke = new Particle.DustTransition(Color.fromRGB(34, 30, 42), Color.fromRGB(83, 72, 95), 100F);
 
     //Vulkanbombem
     public static void spit() {
@@ -66,11 +65,13 @@ public class Volcano implements Listener {
                 task.cancel();
             }
             //Während des Ausbruchs
-            if (Random.rint(strength, 6) == 6) spit();
-            if (Random.rint(strength, 8) == 6) world.spawnParticle(Particle.REDSTONE, loc, 1, 2, 2, 2, 0, smoke, true);
-            world.spawnParticle(Particle.SMOKE_LARGE, loc, 1, 2, 2, 2, 0, null, true);
+            if (!DayTimer.timerPaused && Random.rint(strength, 6) == 6) spit();
+            if (Random.rint(strength, 8) == 6) world.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, loc, 6, 4, 8, 4, 0.05, null, true);
+            int color = Random.rint(40, 120);
+            world.spawnParticle(Particle.REDSTONE, loc, 10, 10, 7, 10, 0.1,
+                    new Particle.DustOptions(Color.fromRGB(color,color,color), 30.0F), true);
             if (Random.rint(strength, 10) == 6) world.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 30F, 0.6F);
-            if (Random.rint(0, 50) == 0) world.playSound(loc, Sound.ENTITY_WITCH_AMBIENT, 7F, 0.5F);
+            if (Random.rint(0, 50) == 0) world.playSound(loc, Sound.ENTITY_WITHER_AMBIENT, 0.7F, 0.5F);
 
             timeErupting++;
         }, 100, 5); //Timings

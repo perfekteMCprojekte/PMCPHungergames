@@ -5,6 +5,7 @@ import de.pmcp.hungergames.CMDS.Adminmsg;
 import de.pmcp.hungergames.CMDS.Timer;
 import de.pmcp.hungergames.game.*;
 import de.pmcp.hungergames.CMDS.TabCompletion;
+import de.pmcp.hungergames.CMDS.volcano;
 import de.pmcp.hungergames.CMDS.Freeze;
 import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Freezer;
@@ -29,6 +30,7 @@ public final class main extends JavaPlugin {
         newCommand("adminmsg", new Adminmsg());
         newCommand("freeze", new Freeze());
         newCommand("timer", new Timer(), new TabCompletion());
+        newCommand("volcano", new volcano());
 
         //Event Listener registrieren
         newEvent(new Freezer());

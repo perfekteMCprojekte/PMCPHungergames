@@ -46,6 +46,10 @@ commands:
     description: Timer für das Spiel (einen tag)
     usage: §7/timer §f[pause, run, set <sekunden>, status]
 
+    volcano:
+      permission: pmcp.admin
+      permission-message: Nicht jeder Mensch.
+
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
 #Kommentar für Justus: du stinkst

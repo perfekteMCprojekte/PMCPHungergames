@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 
 //Effekte für einen Vulkan
 public class Volcano implements Listener {
-    static World world = Bukkit.getWorlds().get(0);
+    static World world = Engine.world;
     static Location loc = new Location(world, -980.00, 70.00, 384.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
     static Material[] vulcanoDrops = {Material.MAGMA_BLOCK, Material.MAGMA_BLOCK, Material.OBSIDIAN, Material.ANDESITE, Material.TUFF, Material.TUFF}; //Materialien für Vulkanbomben
     static int timeErupting = 0;
@@ -69,7 +69,7 @@ public class Volcano implements Listener {
             if (Random.rint(strength, 6) == 6) spit();
             if (Random.rint(strength, 8) == 6) world.spawnParticle(Particle.REDSTONE, loc, 1, 2, 2, 2, 0, smoke, true);
             world.spawnParticle(Particle.SMOKE_LARGE, loc, 1, 2, 2, 2, 0, null, true);
-            if (Random.rint(strength, 16) == 6) world.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 10F, 0.6F);
+            if (Random.rint(strength, 10) == 6) world.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 30F, 0.6F);
             if (Random.rint(0, 50) == 0) world.playSound(loc, Sound.ENTITY_WITCH_AMBIENT, 7F, 0.5F);
 
             timeErupting++;

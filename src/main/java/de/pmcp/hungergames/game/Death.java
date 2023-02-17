@@ -1,8 +1,8 @@
 package de.pmcp.hungergames.game;
 
-import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Item;
 import de.pmcp.hungergames.tools.Random;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -12,35 +12,40 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-
 public class Death implements Listener {
     public static int deathCount;
-    public static ArrayList<String> deathMessages = new ArrayList<String>(); //Todesnachrichtenspeicher
 
+    //Sucht einen zufälligen String aus + leerzeichen davor
+    public String gre(String... list) { return " " + list[Random.rint(0, list.length-1)]; }
+
+    //Generiert Nachricht aus
     public void create_death_message(String victim, String killer, String cause) {
-        String message = "ERROR";
-        Bukkit.broadcastMessage("->"+cause+"<-");
+        String message = victim + gre("starb auf unbekannte Art", "kam ums Leben", "erlitt einen tragischen Tod", "verunglückte tödlich");
+        Bukkit.broadcastMessage("Mörder: " + killer); Bukkit.broadcastMessage("Opfer: " + victim); Bukkit.broadcastMessage("Grund: " + cause); //Debug
         if (!killer.equals("")) {
-            if (cause.contains("burned")) message = victim + " war Feuer und Flamme ";
-            else message = victim + " erlitt einen tragischen Unfall ";
+            if (cause.contains("fell out of the world")) message = gre("hehe, da hat jemand /kill für "+victim+" genutzt", victim+"wurde zufällig tod aufgefunden");
+            else if (cause.contains("burned")) message = victim+" war Feuer und Flamme ";
         }
         else {
-            if (cause.contains("was slain by")) message = victim + " hatte eine unangenehme Begegnung mit " + killer;
+            if (cause.contains("was slain by")) message = gre(victim+" hatte eine unangenehme Begegnung mit "+killer, killer+" braachte "+victim+" um");
+            else if (cause.contains("shot by")) message = gre(killer+" führte an "+victim+"den Murrika Move durch");
+
         }
-        deathMessages.add(message);
+        message = "§c" + message;
+        Engine.news.add(message);
     }
 
 
     @EventHandler
     public void death(@NotNull PlayerDeathEvent event) { //Bei Spielertod
         Player player = event.getEntity();
-        //if(player.isOp()) return; //BITTE ENTKOMMENTIEREN
+        if(player.isOp()) return; //BITTE ENTKOMMENTIEREN
+
         //Inhalte der Todesnachricht
         String victim, cause, killer;
-        victim = player.toString();
-        killer = (player.getKiller() == null) ? "" : player.getKiller().toString();
-        cause = event.getDeathMessage().replace(victim, "").replace(killer, "");
+        victim = player.getName();
+        killer = (player.getKiller() == null) ? "" : player.getKiller().getName();
+        cause = event.getDeathMessage().replace(victim, "").replace(killer, "").strip();
         //Todesnachricht kreieren und speichern
         create_death_message(victim, killer, cause);
 

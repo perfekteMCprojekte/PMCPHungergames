@@ -14,6 +14,7 @@ public class DayTimer {
     public static boolean timerPaused = true;
 
     public static void timer() {
+        Engine.day = 2; //Für Tagesübergreifende Tests
         int day = Engine.day;
         Bukkit.getScheduler().runTaskTimer(main.plugin,task -> { //Timer für Spielzeit
             //Tageszeit berechnen und setzen (sonnenaufgang bis mitternacht)
@@ -30,38 +31,25 @@ public class DayTimer {
             }
             //Start des Tages
             else if (time == 0) {
-                Death.deathMessages.clear();
+                Engine.news.clear();
                 Engine.day++;
                 Freeze.isfreeze = false;
 
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
-                    player.playSound(player, Sound.ENTITY_WITHER_SPAWN, 10F, 0.5F);
-                }
+                Engine.world.playSound(Engine.center, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
+                Engine.world.playSound(Engine.center, Sound.ENTITY_WITHER_SPAWN, 10F, 0.5F);
+                Bukkit.broadcastMessage("§e[§6Hungergames§e] §c§l" + ((day==1) ? "Die Spiele sind" : "Der Tag ist") +  " gestartet: §6§lViel Glück!");
 
-                if (day == 1) {
-                    Bukkit.broadcastMessage("§6§lSo mögen die Spiele beginnen: \n" + "§4§lViel Glück!");
-                } else {
-                    Bukkit.broadcastMessage("§6§lDer Tag ist gestartet: \n" + "§4§lViel Glück!");
-                    //hier war mal das
-                }
             }
             //Während dem Tag
             else if (time < sessionLength) {
                 int dist = sessionLength - time; //Abstand zum Ende des Tages
                 if (ArrayUtils.contains(timerPoints, dist))
-                    if (day == 7)
-                        Bukkit.broadcastMessage("§e[§6Hungergames§e] §4Die Spiele laufen noch §c" + (dist >= 60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
-                    else
-                        Bukkit.broadcastMessage("§e[§6Hungergames§e] §4Der Tag endet in §c" + (dist >= 60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
+                    Bukkit.broadcastMessage("§e[§6Hungergames§e] §4" + ((day==7) ? "Spiele enden in §c" : "Der Tag endet in §c") + (dist >= 60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
             }
             //Ende des Tages
             else if (time == sessionLength) {
-                for (Player player : Bukkit.getOnlinePlayers()) player.playSound(player, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
-                if (day == 7)
-                    Bukkit.broadcastMessage("§6§lDie Spiele sind geendet!");
-                else
-                    Bukkit.broadcastMessage("§6§lDer Tag ist geendet!");
+                Engine.world.playSound(Engine.center, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
+                Bukkit.broadcastMessage("§e[§6Hungergames§e] §c§l" + ((day==7) ? "Die Spiele sind geendet!" : "Der Tag ist geendet!"));
                 Freeze.isfreeze = true;
             }
             //Tagesschau

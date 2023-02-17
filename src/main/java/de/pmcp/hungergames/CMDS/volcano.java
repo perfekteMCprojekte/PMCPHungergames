@@ -27,6 +27,6 @@ public class volcano implements CommandExecutor {
         }
         else
             sender.sendMessage("§e[§6Hungergames§e]§7 volcano [erupt]<seconds><strength 1-5> , [stop] , [setpos]");
-        return false;
+        return true;
     }
 }

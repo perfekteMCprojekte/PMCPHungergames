@@ -25,6 +25,7 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Engine implements Listener {
     public static int day = 0; //0 vor beginn, startet bei 1
@@ -33,10 +34,10 @@ public class Engine implements Listener {
     HashMap<Player, String> chatHistory = new HashMap<Player, String>(); //Für Speicherung der letzten Nachricht eines Spielers
     String[] blockList = {"nigger", "niger ", "arschloch", "wichser", "wikser", "verpiss", "fick", "fik", "huhre", "hure", "deez", "nuts", "nutt", "österreich", "bist scheiße", "sie arschloch"}; //Blocklist für chat
     static ItemStack[] playerGifts = { //Random Drops für Spieler
-            Item.create(Material.TNT, Random.rint(2,4), "§lSprengstoff", "Trotyll löst automatisch aus, \nwenn Spieler in der nähe sind"),
-            Item.create(Material.BREAD, Random.rint(6, 14), "brod", "essbar"),
-            Item.create(Material.FLINT_AND_STEEL, Random.rint(1, 2), "Feuerzeug", "eine zündende Idee"),
-            Item.create(Material.ARROW, Random.rint(5, 21), "Pfeil", "ein nützliches Werkzeug")
+            Item.create(Material.TNT, Random.rint(3,7), "§lSprengstoff", "Trotyll löst automatisch aus, \nwenn Spieler in der nähe sind"),
+            Item.create(Material.BREAD, Random.rint(12, 32), "brod", "essbar"),
+            Item.create(Material.FLINT_AND_STEEL, Random.rint(1, 3), "Feuerzeug", "eine zündende Idee"),
+            Item.create(Material.ARROW, Random.rint(19, 46), "Pfeil", "ein nützliches Werkzeug")
     };
     public static ArrayList<String> news = new ArrayList<String>(); //Nachrichtenspeicher für Events
     public static ArrayList<int[]> explosives = new ArrayList<int[]>(); //Liste der Koordinaten der Trotyll Blöcke zum auslösen
@@ -53,7 +54,7 @@ public class Engine implements Listener {
         DayTimer.timer();
 
         //Hide Nametag team erstellen wenn nicht vorhanden
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
         if (scoreboard.getTeam("hide_nametag") == null) {
             Team team = scoreboard.registerNewTeam("hide_nametag");
             team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
@@ -80,7 +81,7 @@ public class Engine implements Listener {
             //Goodies
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.isOp()) continue;
-                if (Random.rint(1, 1456) == 1) { //Lost für Spieler aus
+                if (Random.rint(1, 2135) == 1) { //Lost für Spieler aus
                     ItemStack item = playerGifts[Random.rint(0, playerGifts.length)]; //Lost Drop aus
                     player.getInventory().addItem(item);
                     player.sendMessage("§e[§6Hungergames§e] §g Due erhälst " + item.getItemMeta().getDisplayName() + " von einem unbekannten Sponsor");

@@ -14,7 +14,8 @@ import org.bukkit.util.Vector;
 //Effekte für einen Vulkan
 public class Volcano implements Listener {
     static World world = Engine.world;
-    static Location loc = new Location(world, -980.00, 70.00, 384.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
+    //29 102 5
+    static Location loc = new Location(world, 29.00, 102.00, 5.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
     static Material[] vulcanoDrops = {Material.MAGMA_BLOCK, Material.MAGMA_BLOCK, Material.OBSIDIAN, Material.ANDESITE, Material.TUFF, Material.TUFF}; //Materialien für Vulkanbomben
     static int timeErupting = 0;
     static boolean isErupting = false;

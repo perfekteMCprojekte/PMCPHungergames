@@ -75,7 +75,7 @@ public class Engine implements Listener {
             }}
 
             //Vulkanausbrüche
-            if (DayTimer.time > 120 && Random.rint(1, 12) == 1) Volcano.erupt(Random.rint(65, 346), Random.rint(1,5));
+            if (DayTimer.time > 120 && Random.rint(1, 1200) == 1) Volcano.erupt(Random.rint(65, 346), Random.rint(1,5));
 
             //Goodies
             for (Player player : Bukkit.getOnlinePlayers()) {

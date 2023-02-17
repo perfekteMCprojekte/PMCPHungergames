@@ -38,6 +38,7 @@ public class DayTimer {
                 Engine.world.playSound(Engine.center, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
                 Engine.world.playSound(Engine.center, Sound.ENTITY_WITHER_SPAWN, 10F, 0.5F);
                 Bukkit.broadcastMessage("§e[§6Hungergames§e] §c§l" + ((day==1) ? "Die Spiele sind" : "Der Tag ist") +  " gestartet: §6§lViel Glück!");
+
             }
             //Während dem Tag
             else if (time < sessionLength) {
@@ -55,7 +56,7 @@ public class DayTimer {
             else if (time == sessionLength+20) Info.nachrichten();
             //Ende
             else if (time >= sessionLength+60) {
-                for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§4Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");
+                for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§6Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");
                 timerPaused = true;
             }
 

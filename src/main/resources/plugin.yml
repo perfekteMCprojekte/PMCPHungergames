@@ -49,6 +49,9 @@ commands:
   volcano:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
+    description: Den Vulkan kontrollieren
+    usage: §7/volcano §f[erupt <sekunden><stärke 1-5>, stop, setpos]
+
 
 
 #Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile

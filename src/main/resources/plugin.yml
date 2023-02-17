@@ -46,7 +46,7 @@ commands:
     description: Timer für das Spiel (einen tag)
     usage: §7/timer §f[pause, run, set <sekunden>, status]
 
-volcano:
+  volcano:
     permission: pmcp.admin
     permission-message: Nicht jeder Mensch.
     description: Den Vulkan kontrollieren

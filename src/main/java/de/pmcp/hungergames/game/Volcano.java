@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class Volcano implements Listener {
     static World world = Engine.world;
     //29 102 5
-    public static Location loc = new Location(world, 29.00, 102.00, 5.00); //HIER BITTE VULKAN COORDS EINTRAGEN!
+    public static Location loc = new Location(world, 29, 102, 5); //HIER BITTE VULKAN COORDS EINTRAGEN!
     static Material[] vulcanoDrops = {Material.MAGMA_BLOCK, Material.MAGMA_BLOCK, Material.OBSIDIAN, Material.ANDESITE, Material.TUFF, Material.TUFF}; //Materialien für Vulkanbomben
     static int timeErupting = 0;
     public static boolean isErupting = false;
@@ -27,7 +27,7 @@ public class Volcano implements Listener {
 
         //Die Vulkanbombe erstellen
         FallingBlock bombe = world.spawnFallingBlock(loc, vulcanoDrops[Random.rint(0, vulcanoDrops.length-1)], (byte) 0);
-        bombe.setVelocity(new Vector(Random.rouble(-1, 1), Random.rouble(0.2, 4.0), Random.rouble(-1, 1)));
+        bombe.setVelocity(new Vector(Random.coin()?Random.rouble(-3.8, -1):Random.rouble(1, 3.8), Random.rouble(2.0, 7.4), Random.coin()?Random.rouble(-3.8, -1):Random.rouble(1, 3.8)));
         bombe.setDropItem(false);
         world.playSound(bombe.getLocation(), Sound.ENTITY_WITHER_HURT, 6F, 0.5F);
 
@@ -65,7 +65,7 @@ public class Volcano implements Listener {
                 task.cancel();
             }
             //Während des Ausbruchs
-            if (!DayTimer.timerPaused && Random.rint(strength, 6) == 6) spit();
+            if (!Timer.timerPaused && Random.rint(strength, 6) == 6) spit();
             if (Random.rint(strength, 8) == 6) world.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, loc, 6, 4, 8, 4, 0.05, null, true);
             int color = Random.rint(40, 120);
             world.spawnParticle(Particle.REDSTONE, loc, 10, 10, 7, 10, 0.1,

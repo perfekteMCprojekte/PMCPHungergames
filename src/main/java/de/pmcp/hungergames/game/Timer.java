@@ -1,14 +1,13 @@
 package de.pmcp.hungergames.game;
 
-import de.pmcp.hungergames.CMDS.Freeze;
+import de.pmcp.hungergames.CMDS.freeze;
 import de.pmcp.hungergames.main;
-import de.pmcp.hungergames.tools.Random;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-public class DayTimer {
+public class Timer {
     public static int sessionLength = 40 * 60; //Sessiondauer Angeben (min * sek)
     final static int[] timerPoints = {60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; //Benachrichtigungsstände als Abstand zum Punkt Null
     public static int time = -600; //VORBEREITUNGSZEIT BITTE ÄNDERN
@@ -28,14 +27,12 @@ public class DayTimer {
                 if (ArrayUtils.contains(timerPoints, dist))
                     Bukkit.broadcastMessage("§e[§6Hungergames§e] §4"+ ((day == 0) ? "§4Die Spiele starten in §c": "§4Der Tag beginnt in §c") + (dist <= -60 ? dist / 60 + " §4Minuten" : dist + " §4Sekunden"));
                 if (time == -100 && day > 1) Info.nachrichten();
-                if (time == -540) Engine.world.playSound(Engine.center, (Random.rint(0,1)==1) ? Sound.MUSIC_DISC_PIGSTEP : Sound.MUSIC_DISC_CHIRP, 1000F, 1F); //Wartemusik
-                else if (time == -350) Engine.world.playSound(Engine.center, (Random.rint(0,1)==1) ? Sound.MUSIC_DISC_OTHERSIDE : Sound.MUSIC_DISC_WAIT, 1000F, 1F); //Wartemusik
             }
             //Start des Tages
             else if (time == 0) {
                 Engine.news.clear();
                 Engine.day++;
-                Freeze.isfreeze = false;
+                freeze.isfreeze = false;
 
                 Engine.world.playSound(Engine.center, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
                 Engine.world.playSound(Engine.center, Sound.ENTITY_WITHER_SPAWN, 10F, 0.5F);
@@ -52,10 +49,10 @@ public class DayTimer {
             else if (time == sessionLength) {
                 Engine.world.playSound(Engine.center, Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 10F, 1F);
                 Bukkit.broadcastMessage("§e[§6Hungergames§e] §c§l" + ((day==7) ? "Die Spiele sind geendet!" : "Der Tag ist geendet!"));
-                Freeze.isfreeze = true;
+                freeze.isfreeze = true;
             }
             //Tagesschau
-            else if (time == sessionLength+20) Info.nachrichten();
+            else if (time == sessionLength+10) Info.nachrichten();
             //Ende
             else if (time >= sessionLength+60) {
                 for (Player player : Bukkit.getOnlinePlayers()) player.kickPlayer("§6Der Tag ist geendet!\n§gDer Nächste Tag wird bald beginnen!\nDanke fürs Spielen");

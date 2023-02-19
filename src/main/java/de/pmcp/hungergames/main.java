@@ -1,12 +1,8 @@
 package de.pmcp.hungergames;
 
 //Hungergames Dateien
-import de.pmcp.hungergames.CMDS.Adminmsg;
-import de.pmcp.hungergames.CMDS.Timer;
+import de.pmcp.hungergames.CMDS.*;
 import de.pmcp.hungergames.game.*;
-import de.pmcp.hungergames.CMDS.TabCompletion;
-import de.pmcp.hungergames.CMDS.volcano;
-import de.pmcp.hungergames.CMDS.Freeze;
 import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Freezer;
 
@@ -27,10 +23,11 @@ public final class main extends JavaPlugin {
         Bukkit.getLogger().info("§2PMCP Hungergames Plugin ist nun gestartet.");
 
         //Befehle registrieren
-        newCommand("adminmsg", new Adminmsg());
-        newCommand("freeze", new Freeze());
-        newCommand("timer", new Timer(), new TabCompletion());
-        newCommand("volcano", new volcano());
+        newCommand("adminmsg", new adminmsg());
+        newCommand("freeze", new freeze());
+        newCommand("timer", new timer(), new TabCompletion());
+        newCommand("volcano", new volcano(), new TabCompletion());
+        newCommand("engine", new engine(), new TabCompletion());
 
         //Event Listener registrieren
         newEvent(new Freezer());

@@ -51,7 +51,7 @@ public class Engine implements Listener {
         //Funktionen beim Serverstart
         Freezer.main();
         Info.main();
-        DayTimer.timer();
+        Timer.timer();
 
         //Hide Nametag team erstellen wenn nicht vorhanden
         Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
@@ -64,7 +64,7 @@ public class Engine implements Listener {
         BukkitScheduler scheduler = Bukkit.getScheduler();
         scheduler.runTaskTimer(main.plugin, task -> {
             //Berstende Kniescheiben
-            if (DayTimer.time > 600) {
+            if (Timer.time > 600) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.isOp()) continue;
                 if (Random.rint(1, 3600) == 1) {
@@ -76,7 +76,7 @@ public class Engine implements Listener {
             }}
 
             //Vulkanausbrüche
-            if (DayTimer.time > 120 && Random.rint(1, 1200) == 1) Volcano.erupt(Random.rint(65, 346), Random.rint(1,5));
+            if (Timer.time > 120 && Random.rint(1, 1200) == 1) Volcano.erupt(Random.rint(65, 346), Random.rint(1,5));
 
             //Goodies
             for (Player player : Bukkit.getOnlinePlayers()) {

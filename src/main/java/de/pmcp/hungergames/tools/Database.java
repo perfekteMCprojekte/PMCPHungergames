@@ -2,19 +2,19 @@ package de.pmcp.hungergames.tools;
 
 import de.pmcp.hungergames.game.Death;
 import de.pmcp.hungergames.game.Engine;
+import de.pmcp.hungergames.game.Volcano;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
+import org.bukkit.Location;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 
-import javax.xml.crypto.Data;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -63,6 +63,7 @@ public class Database implements Serializable {
         data.put("deathcount", Death.deathCount);
         data.put("deathmessages", Engine.news);
         data.put("explosives", Engine.explosives);
+        data.put("volcanoloc", new double[]{Volcano.loc.getX(), Volcano.loc.getY(), Volcano.loc.getZ()});
         write(data);
     }
 
@@ -74,5 +75,7 @@ public class Database implements Serializable {
         Death.deathCount = (int) map.get("deathcount");
         Engine.news = (ArrayList<String>) map.get("deathmessages");
         Engine.explosives = (ArrayList<int[]>) map.get("explosives");
+        double[] x = (double[]) map.get("volcanoloc"); //Ich weiß es ist schlimm
+        Volcano.loc.setX(x[0]); Volcano.loc.setY(x[1]); Volcano.loc.setZ(x[2]);
     }
 }

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-public class Adminmsg implements CommandExecutor {
+public class adminmsg implements CommandExecutor {
     final String hg = "§e[§6Hungergames§e] ";
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,  String[] args) {

@@ -30,27 +30,37 @@ permissions:
 commands:
   adminmsg:
     permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
+    permission-message: §8Nicht jeder Mensch.
     description: Sende ein Nachricht als PMCP
     usage: §7/adminmsg §f<deine Nachricht>
 
   freeze:
     permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
+    permission-message: §8Nicht jeder Mensch.
     description: Pausiert alles
     aliases: pause
 
   timer:
     permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
+    permission-message: §8Nicht jeder Mensch.
     description: Timer für das Spiel (einen tag)
     usage: §7/timer §f[pause, run, set <sekunden>, status]
 
   volcano:
     permission: pmcp.admin
-    permission-message: Nicht jeder Mensch.
+    permission-message: §8Nicht gestatten!
     description: Den Vulkan kontrollieren
     usage: §7/volcano §f[erupt <sekunden><stärke 1-5>, stop, setpos]
+
+  engine:
+    permission: pmcp.admin
+    permission-message: §8Nicht jeder Mensch.
+    description: Den Vulkan kontrollieren
+    usage: §7/volcano §f[erupt <sekunden><stärke 1-5>, stop, setpos]
+
+  help:
+    permission: pmcp.niederesvolk
+    description: Erklärung für Hungergames
 
 
 

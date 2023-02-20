@@ -23,7 +23,7 @@ public class Death implements Listener {
         String message = victim + gre("starb auf unbekannte Art", "kam ums Leben", "erlitt einen tragischen Tod", "verunglückte tödlich"); //defaults
         //Bukkit.broadcastMessage("Mörder: " + killer); Bukkit.broadcastMessage("Opfer: " + victim); Bukkit.broadcastMessage("Grund: " + cause); //Debug
 
-        if (!killer.equals("")) { //Ohne Mörder
+        if (killer.equals("ERROR")) { //Ohne Mörder
             if (cause.contains("fell out of the world")) message = gre("hehe, da hat jemand /kill für "+victim+" genutzt", victim+"wurde zufällig tod aufgefunden");
             else if (cause.contains("was pricked to death")) message = gre(victim+"+kaktus+L", victim+" warf sich in einen Kaktus"); //Kaktus
             else if (cause.contains("drowned")) message = gre(victim+" ging unter wie ein fetter Fels", "Jeder Fisch ist fähiger als "+victim); //Ertrinken
@@ -81,7 +81,7 @@ public class Death implements Listener {
         deathCount++;
 
         //Todesnachricht kreieren und speichern
-        create_death_message(player.getName(), (player.getKiller()==null)?"":player.getKiller().getName(), event.getDeathMessage());
+        create_death_message(player.getName(), (player.getKiller()==null)?"ERROR":player.getKiller().getName(), event.getDeathMessage());
 
         //Effekte
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 100F, 0.5F);

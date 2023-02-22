@@ -28,6 +28,7 @@ public final class main extends JavaPlugin {
         newCommand("timer", new timer(), new TabCompletion());
         newCommand("volcano", new volcano(), new TabCompletion());
         newCommand("engine", new engine(), new TabCompletion());
+        newCommand("help", new help());
 
         //Event Listener registrieren
         newEvent(new Freezer());

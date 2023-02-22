@@ -1,7 +1,6 @@
 package de.pmcp.hungergames.tools;
 
 import de.pmcp.hungergames.CMDS.freeze;
-import de.pmcp.hungergames.game.Engine;
 import de.pmcp.hungergames.game.Timer;
 import de.pmcp.hungergames.main;
 import org.bukkit.Bukkit;
@@ -16,7 +15,8 @@ import org.bukkit.scheduler.BukkitScheduler;
 public class Freezer implements Listener {
     static boolean waitSwitch = true;
     //NACHRICHTEN FÜR WARTEBILDSCHIRM
-    static String[] waitTexts = {"Pizza ist ein Obstkuchen", "cargospace", "AAAAAAAAAAAAAAAAAAAA", "Lukas stinkt", "E", "Nett hier, Kriegsverbrechen", "Wir reden nicht über den Keller!"};
+    static String[] waitTexts = {"Pizza ist ein Obstkuchen", "/help", "'Original gebranntes Senfpferd'", "Lukas stinkt",
+            "E", "Nett hier, ABER WAREN SIE SCHO", "Wir reden nicht über den Keller!", "sei nett"};
 
     @EventHandler
     public void freeze_move(PlayerMoveEvent event) {

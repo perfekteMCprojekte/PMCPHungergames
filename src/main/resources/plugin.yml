@@ -61,10 +61,11 @@ commands:
   help:
     permission: pmcp.niederesvolk
     description: Erklärung für Hungergames
+    aliases: [hilfe, pmcp]
 
 
 
-#Kommentar für mich: listen angeben mit [..., ...] oder ... oder -... jede zeile
+#Kommentar für mich: listen angeben mit [..., ...], oder ..., oder -... (jede zeile)
 #Kommentar für Justus: du stinkst
 #Kommentar für Lukas: Danke gleichfalls.
 #Lukas Antworte doch

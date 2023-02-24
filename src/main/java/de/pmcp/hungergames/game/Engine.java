@@ -1,5 +1,6 @@
 package de.pmcp.hungergames.game;
 
+import de.pmcp.hungergames.CMDS.freeze;
 import de.pmcp.hungergames.main;
 import de.pmcp.hungergames.tools.Database;
 import de.pmcp.hungergames.tools.Freezer;
@@ -64,14 +65,17 @@ public class Engine implements Listener {
         //Hauptschleife für alle Events, usw.
         BukkitScheduler scheduler = Bukkit.getScheduler();
         scheduler.runTaskTimer(main.plugin, task -> {
+            if (freeze.isfreeze) return;
+
             //Berstende Kniescheiben
             if (Timer.time > 600) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.isOp()) continue;
                 if (Random.rint(1, 3600) == 1) {
                     player.playSound(player, Sound.ENTITY_PLAYER_HURT, 1, 1);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Random.rint(33, 76), 1, false, false));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Random.rint(14, 28), 255, false, false));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Random.rint(33, 76)*20, 1, false, false));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Random.rint(14, 28)*20, 0, false, false));
+                    player.setHealth(player.getHealth()-1);
                     player.sendTitle("", "§8§oDeine Kniekappen bersten", 10, 20, 10);
                     player.setMetadata("no-kneecaps", new FixedMetadataValue(main.plugin, true));
                 }

@@ -24,21 +24,21 @@ public class Death implements Listener {
         //Bukkit.broadcastMessage("Mörder: " + killer); Bukkit.broadcastMessage("Opfer: " + victim); Bukkit.broadcastMessage("Grund: " + cause); //Debug
 
         if (killer.equals("ERROR")) { //Ohne Mörder
-            if (cause.contains("fell out of the world")) message = gre("hehe, da hat jemand /kill für "+victim+" genutzt", victim+"wurde zufällig tod aufgefunden");
+            if (cause.contains("fell out of the world")) message = gre("hehe, da hat jemand /kill für "+victim+" genutzt", victim+"wurde zufällig tod aufgefunden", victim+" starb auf absolut unerklärliche weise §lLUKAS?");
             else if (cause.contains("was pricked to death")) message = gre(victim+"+kaktus+L", victim+" warf sich in einen Kaktus"); //Kaktus
-            else if (cause.contains("drowned")) message = gre(victim+" ging unter wie ein fetter Fels", "Jeder Fisch ist fähiger als "+victim); //Ertrinken
-            else if (cause.contains("blew up")) message = gre(victim+" flog in die Luft", "Eine Explosion erfasste "+victim); //Pfeil
+            else if (cause.contains("drowned")) message = gre(victim+" ging unter wie ein fetter Fels", "Jeder Fisch ist fähiger als "+victim, victim+" hat vergessen das sie/er Luft braucht"); //Ertrinken
+            else if (cause.contains("blew up")) message = gre(victim+" flog in die Luft", "Eine Explosion erfasste "+victim, victim+" erfuhr eine Druckwelle"); //Pfeil
             else if (cause.contains("hit the ground")) message = gre(victim+" stolperte", victim+" küsste den Boden"); //Fallen
-            else if (cause.contains("fell")) message = gre(victim+" genoss die Schwerelosigkeit", victim+" sprang"); //Fallschaden hoch
+            else if (cause.contains("fell")) message = gre(victim+" genoss die Schwerelosigkeit", victim+" sprang", victim+" fand eine Abgrund und wollte nicht mehr"); //Fallschaden hoch
             else if (cause.contains("was impaled on a stalagmite")) message = gre("Die Stalagmite, oder was Stalagtite?, egal, war eine gute Lösung für "+victim); //Stalagmite
-            else if (cause.contains("was squashed")) message = gre("Alles Gute kommt von oben, so auch bei "+victim); //Fallender block
+            else if (cause.contains("was squashed")) message = gre("Alles Gute kommt von oben, so auch bei "+victim, "Wir haben das Thema "+victim+" begraben"); //Fallender block
             else if (cause.contains("was skewered")) message = gre(victim+" wurde zum Grillspieß, muss ich das weiter ausführen?"); //Stalagtite
             else if (cause.contains("went up in flames")) message = gre(victim+" war zu warm", victim+" wusste genau wo es brannte"); //In Feuer
             else if (cause.contains("burned to death")) message = gre(victim+" war feuer und flamme"); //verbrennen
             else if (cause.contains("went off with a bang")) message = gre(victim+" liebt böller", "Ein Feuerwerk ging für "+victim+" auf!"); //feuerwerk
-            else if (cause.contains("tried to swim in lava")) message = gre(victim+" nahm ein heißes bad", "in Freiheitseinheiten erschien "+victim+" die Temperatur viel niedriger"); //lava
-            else if (cause.contains("was struck by lightning")) message = gre("Eine elektrisierende Erfahrung wurde "+victim+" zuteil"); //blitz
-            else if (cause.contains("the floor was lava")) message = gre(victim+" trat auf einen heißen Stein"); //magmablock
+            else if (cause.contains("tried to swim in lava")) message = gre(victim+" wollte sich eine Vorstellung von Hawaii", "in Freiheitseinheiten erschien "+victim+" die Temperatur viel niedriger"); //lava
+            else if (cause.contains("was struck by lightning")) message = gre("Eine elektrisierende Erfahrung wurde "+victim+" zuteil", "Jemand hätte "+victim+" von Leitungssicherheit erzählen sollen"); //blitz
+            else if (cause.contains("the floor was lava")) message = gre(victim+" trat auf einen heißen Stein", victim+" wollte sich eine Vorstellung von Hawaii machen"); //magmablock
             else if (cause.contains("was killed by magic")) message = gre(victim+" starb imaginär", "ERROR"); //magie
             else if (cause.contains("froze to death")) message = gre(victim+" zog sich eine Erkältung zu", "Wer außer "+victim+" ist so blöd in Schnee stecken zu bleiben?"); //puderschnee
             else if (cause.contains("suffocated")) message = gre(victim+" ging mit dem Kopf durch die Wand, versuchte es zumindest"); //ersticken in block
@@ -85,7 +85,7 @@ public class Death implements Listener {
 
         //Effekte
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 100F, 0.5F);
-        player.getWorld().dropItemNaturally(player.getLocation(), Item.create(Material.EGG, 2, "Kniescheibe", "Eine wertvolle Ressource\nVon:" + player.getDisplayName()));
+        player.getWorld().dropItemNaturally(player.getLocation(), Item.create(Material.EGG, 2, "§cKniescheibe", "Eine wertvolle Ressource\nVon:" + player.getDisplayName()));
         Volcano.erupt(Random.rint(40, 85), Random.rint(1,2));
 
         //Eliminieren!

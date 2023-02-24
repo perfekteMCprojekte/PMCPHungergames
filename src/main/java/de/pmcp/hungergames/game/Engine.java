@@ -75,7 +75,7 @@ public class Engine implements Listener {
                     player.playSound(player, Sound.ENTITY_PLAYER_HURT, 1, 1);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Random.rint(33, 76)*20, 1, false, false));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Random.rint(14, 28)*20, 0, false, false));
-                    player.setHealth(player.getHealth()-1);
+                    if (player.getHealth() > 2) player.setHealth(player.getHealth()-1);
                     player.sendTitle("", "§8§oDeine Kniekappen bersten", 10, 20, 10);
                     player.setMetadata("no-kneecaps", new FixedMetadataValue(main.plugin, true));
                 }

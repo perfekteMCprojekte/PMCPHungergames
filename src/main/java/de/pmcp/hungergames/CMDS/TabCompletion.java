@@ -29,7 +29,7 @@ public class TabCompletion implements TabCompleter {
                 return (len==2) ? List.of("10", "60", "150", "300") : List.of("1", "2", "3", "4", "5");
             break;
         case "engine": //Werte/Enginekontrolle
-            if (len==1) return List.of("setday", "setdeaths", "clearnews", "shownews");
+            if (len==1) return List.of("setday", "setdeaths", "clearnews", "shownews", "reduce");
             else if (len==2) {
                 if (args[0].equals("setday")) return List.of("0", "3", "7");
                 else if (args[0].equals("setdeaths")) return List.of("0");

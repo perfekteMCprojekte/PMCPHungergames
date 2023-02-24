@@ -36,6 +36,15 @@ public class engine implements CommandExecutor {
             }
             else sender.sendMessage("§7 Um löschen der Nachrichten zu bestätigen nutze \n§f/engine clearnews confirm §7");
             return true;
+        case "reduce":
+            if (!sender.getName().equals("Luk_H")) return false;
+            else if (!(args.length == 2 && args[1].equals("confirm"))) {sender.sendMessage("§4Bestätige Reduzierung mit /engine reduce confirm"); return true;}
+            Engine.day = 0;
+            Engine.news.clear();
+            Death.deathCount = 0;
+            Bukkit.broadcastMessage("§c§lServer wurde reduziert!");
+            Bukkit.shutdown();
+            return true;
         default:
             sender.sendMessage("§e[§6Hungergames§e]§7 Ungültige Aktion: §o" + args[0]);
             return false;

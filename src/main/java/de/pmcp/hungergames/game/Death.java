@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Death implements Listener {
     public static int deathCount;
+    String lastDeath = "";
 
     //Sucht einen zufälligen String aus + leerzeichen davor
     public String gre(String... list) { if (list.length==1) return list[0]; else return " " + list[Random.rint(0, list.length-1)]; }
@@ -27,7 +28,7 @@ public class Death implements Listener {
             if (cause.contains("fell out of the world")) message = gre("hehe, da hat jemand /kill für "+victim+" genutzt", victim+"wurde zufällig tod aufgefunden", victim+" starb auf absolut unerklärliche weise §lLUKAS?");
             else if (cause.contains("was pricked to death")) message = gre(victim+"+kaktus+L", victim+" warf sich in einen Kaktus"); //Kaktus
             else if (cause.contains("drowned")) message = gre(victim+" ging unter wie ein fetter Fels", "Jeder Fisch ist fähiger als "+victim, victim+" hat vergessen das sie/er Luft braucht"); //Ertrinken
-            else if (cause.contains("blew up")) message = gre(victim+" flog in die Luft", "Eine Explosion erfasste "+victim, victim+" erfuhr eine Druckwelle"); //Pfeil
+            else if (cause.contains("blew up") || cause.contains("blown up by")) message = gre(victim+" flog in die Luft", "Eine Explosion erfasste "+victim, victim+" erfuhr eine Druckwelle"); //Pfeil
             else if (cause.contains("hit the ground")) message = gre(victim+" stolperte", victim+" küsste den Boden"); //Fallen
             else if (cause.contains("fell")) message = gre(victim+" genoss die Schwerelosigkeit", victim+" sprang", victim+" fand eine Abgrund und wollte nicht mehr"); //Fallschaden hoch
             else if (cause.contains("was impaled on a stalagmite")) message = gre("Die Stalagmite, oder was Stalagtite?, egal, war eine gute Lösung für "+victim); //Stalagmite
@@ -62,7 +63,7 @@ public class Death implements Listener {
             else if (cause.contains("was killed by magic")) message = gre("ERROR"); //magie
             else if (cause.contains("was killed by") && cause.contains("using")) message = gre("Was hast du getan, "+killer+"?"); //tod mit magie
             else if (cause.contains("was frozen to death")) message = gre("<"+victim+"> Brrrrrrrr..."); //puderschnee
-            else if (cause.contains("was slain by")) message = gre(victim+" hatte eine unangenehme Begegnung mit "+killer, killer+" versuchte den Messerkill an "+victim); //umbringen
+            else if (cause.contains("was slain by")) message = gre(victim+" hatte eine unangenehme Begegnung mit "+killer, killer+" versuchte den Messerkill an "+victim); //UMBRINGEN
             else if (cause.contains("suffocated")) message = gre(victim+" fand wollte sich vor "+killer+" in solides Material retten"); //ersticken in block
             else if (cause.contains("was squished")) message = gre(killer+" wurde es zu eng mit "+victim+", er drehte durch"); //entity cap nach kampf
             else if (cause.contains("was poked to death")) message = gre("Wahrscheinlich "+killer+" hat "+victim+"in einen Busch geschubst"); //beerenbusch
@@ -77,7 +78,7 @@ public class Death implements Listener {
     @EventHandler
     public void death(@NotNull PlayerDeathEvent event) { //Bei Spielertod
         Player player = event.getEntity();
-        if(player.isOp()) return; //BITTE ENTKOMMENTIEREN
+        if(player.isOp()) {event.setDeathMessage(null); return;} //BITTE ENTKOMMENTIEREN
         deathCount++;
 
         //Todesnachricht kreieren und speichern
@@ -92,5 +93,8 @@ public class Death implements Listener {
         event.setDeathMessage(null);
         Bukkit.getBanList(BanList.Type.NAME).addBan(String.valueOf(player.getUniqueId()), "§4Du bist Tod!\n§g Danke fürs Spielen.", null, null);
         player.kickPlayer("§4Du bist gestorben!\n§gDu hast 'gut' gekämpft.\nDanke fürs Spielen");
+
+        if (event.getDeathMessage().contains(lastDeath)) return;
+        lastDeath = event.getDeathMessage();
     }
 }

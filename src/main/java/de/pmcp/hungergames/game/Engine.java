@@ -39,7 +39,7 @@ public class Engine implements Listener {
             Item.create(Material.BREAD, Random.rint(12, 32), "brod", "essbar"),
             Item.create(Material.FLINT_AND_STEEL, Random.rint(1, 3), "Feuerzeug", "eine zündende Idee"),
             Item.create(Material.ARROW, Random.rint(19, 46), "Pfeil", "ein nützliches Werkzeug"),
-            Item.create(Material.RED_CANDLE, Random.rint(1, 1), "Hela Gewürzketchup", "Eine besänftigung für den Imperator")
+            Item.create(Material.RED_CANDLE, 1, "Hela Gewürzketchup", "Eine besänftigung für den Imperator")
     };
     public static ArrayList<String> news = new ArrayList<>(); //Nachrichtenspeicher für Events
     public static ArrayList<int[]> explosives = new ArrayList<>(); //Liste der Koordinaten der Trotyll Blöcke zum auslösen

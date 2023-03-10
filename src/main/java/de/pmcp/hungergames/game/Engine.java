@@ -196,6 +196,7 @@ public class Engine implements Listener {
 
             player.removeMetadata("no-kneecaps", main.plugin);
             item.setAmount(item.getAmount() - 1);
+            event.setCancelled(true);
         }
         //Ketchup Nutzung
         else if (item.getItemMeta().getDisplayName().equals("§cHela Gewürzketchup")) {
@@ -204,6 +205,7 @@ public class Engine implements Listener {
             player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Random.rint(45, 93)*20, 0, false, false));
             player.sendMessage("§7Du verspürst die überragende Wirkung von <insert name>");
             item.setAmount(item.getAmount() - 1);
+            event.setCancelled(true);
         }
         //Pulverisation
         else if (item.getItemMeta().getDisplayName().equals("§lPulverisation")) {
@@ -211,9 +213,9 @@ public class Engine implements Listener {
             Engine.world.spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 5, 1, 1, 1);
             Engine.world.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, player.getLocation(), 70, 3, 1, 3);
             item.setAmount(item.getAmount() - 1);
+            event.setCancelled(true);
         }
 
-        event.setCancelled(true);
     }
 
     //Knie-Op extra

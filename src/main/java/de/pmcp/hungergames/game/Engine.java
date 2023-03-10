@@ -39,7 +39,10 @@ public class Engine implements Listener {
             Item.create(Material.BREAD, Random.rint(12, 32), "brod", "essbar"),
             Item.create(Material.FLINT_AND_STEEL, Random.rint(1, 3), "Feuerzeug", "eine zündende Idee"),
             Item.create(Material.ARROW, Random.rint(19, 46), "Pfeil", "ein nützliches Werkzeug"),
-            Item.create(Material.RED_CANDLE, 1, "Hela Gewürzketchup", "Eine besänftigung für den Imperator")
+            Item.create(Material.RED_CANDLE, 1, "§cHela Gewürzketchup", "Eine besänftigung für den Imperator"),
+            Item.create(Material.AXOLOTL_BUCKET, 1, "Fischsuppe", "Trink es!"),
+            Item.create(Material.FIRE_CHARGE, Random.rint(2, 6), "SSss...puff", "."),
+            Item.create(Material.GUNPOWDER, Random.rint(2, 5), "§lPulverisation", "Hilft dir beim verschwinden"),
     };
     public static ArrayList<String> news = new ArrayList<>(); //Nachrichtenspeicher für Events
     public static ArrayList<int[]> explosives = new ArrayList<>(); //Liste der Koordinaten der Trotyll Blöcke zum auslösen
@@ -172,23 +175,45 @@ public class Engine implements Listener {
         world.playSound(block.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1F, 0.7F);
     }
 
-    //Knie-Op
+    //Spezial-Items nutzen
     @EventHandler
     public void use_kneecaps(PlayerInteractEvent event) {
+        if (!event.hasItem() || !event.getItem().hasItemMeta()) return;
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
-        if (!event.hasItem() || !item.getItemMeta().getDisplayName().equals("§cKniescheibe")) return; //kniekappen in hand
-        else if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        else if (!player.hasMetadata("no-kneecaps") && !player.isOp())  {player.sendMessage("§8Du kannst keine Intakten Kniekappen ersetzen"); return;}
 
-        player.removePotionEffect(PotionEffectType.SLOW);
-        player.removePotionEffect(PotionEffectType.JUMP);
-        player.sendMessage("§cDu hast erfolgreich deine Kniekappen ersetzt");
+        //Kniekappen Ersetzung
+        if (item.getItemMeta().getDisplayName().equals("§cKniescheibe")) {
+            if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+            else if (!player.hasMetadata("no-kneecaps") && !player.isOp()) {
+                player.sendMessage("§8Du kannst keine Intakten Kniekappen ersetzen");
+                return;
+            }
 
-        item.setAmount(item.getAmount()-1);
-        player.removeMetadata("no-kneecaps", main.plugin);
+            player.removePotionEffect(PotionEffectType.SLOW);
+            player.removePotionEffect(PotionEffectType.JUMP);
+            player.sendMessage("§cDu hast erfolgreich deine Kniekappen ersetzt");
+
+            player.removeMetadata("no-kneecaps", main.plugin);
+        }
+        //Ketchup Nutzung
+        else if (item.getItemMeta().getDisplayName().equals("§cHela Gewürzketchup")) {
+            if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, Random.rint(32, 68)*20, 0, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Random.rint(45, 93)*20, 0, false, false));
+            player.sendMessage("§7Du verspürst die überragende Wirkung von <insert name>");
+        }
+        //Pulverisation
+        else if (item.getItemMeta().getDisplayName().equals("§lPulverisation")) {
+            if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+            Engine.world.spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 5, 1, 1, 1);
+            Engine.world.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, player.getLocation(), 70, 3, 1, 3);
+        }
+
+        item.setAmount(item.getAmount() - 1);
         event.setCancelled(true);
     }
+
     //Knie-Op extra
     //@EventHandler
     //public void knee_surgery(PlayerInteractAtEntityEvent event) {

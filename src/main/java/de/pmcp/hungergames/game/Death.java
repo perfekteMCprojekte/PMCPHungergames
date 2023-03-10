@@ -77,6 +77,7 @@ public class Death implements Listener {
     //Spielertod verarbeiten
     @EventHandler
     public void death(@NotNull PlayerDeathEvent event) { //Bei Spielertod
+        if (event.getDeathMessage().contains(lastDeath)) return; //doppelte events-schutz
         Player player = event.getEntity();
         if(player.isOp()) {event.setDeathMessage(null); return;} //BITTE ENTKOMMENTIEREN
         deathCount++;
@@ -94,7 +95,6 @@ public class Death implements Listener {
         Bukkit.getBanList(BanList.Type.NAME).addBan(String.valueOf(player.getUniqueId()), "§4Du bist Tod!\n§g Danke fürs Spielen.", null, null);
         player.kickPlayer("§4Du bist gestorben!\n§gDu hast 'gut' gekämpft.\nDanke fürs Spielen");
 
-        if (event.getDeathMessage().contains(lastDeath)) return;
         lastDeath = event.getDeathMessage();
     }
 }
